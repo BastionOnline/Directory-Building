@@ -4,6 +4,7 @@
 \build
 \coding
 \debug menu
+\__pycache__
 
 *.code-workspace
 *.xlsx
