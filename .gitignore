@@ -1,0 +1,10 @@
+\drafts
+\myenv
+\dist
+\build
+\coding
+\debug menu
+
+*.code-workspace
+*.xlsx
+*.exe
