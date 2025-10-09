@@ -5,43 +5,12 @@ import calendar
 import os
 from modules.greeting import hello
 from modules.fileSelect import files, folders
+from modules.propCheck import propertyCheck
 
 FileName, FileNumber, Files, Cash_name, Sched_name, Sales_name, Invoice_name = files()
 SourceDir, PrevDir, cwf, DestDir = folders()
 
-##########################################################################################################################
-# THIS CHECKS FILE PROPERTIES
-
-# FSizes = []
-PresentName = []
-PresentSize = []
-PresentDate = []
-MissingName = []
-
-def Attributes():
-    
-    f = 0
-
-    for f in range(len(Files)):
-
-        filecheck = os.path.exists(SourceDir + Files[f])
-
-        if filecheck == False:
-            MissingName.append(Files[f])
-            # print(Files[f] + " was not found")
-            f +=1
-
-        else:
-            # print(Files[f] + " located")
-            PresentName.append(Files[f])
-            PresentSize.append(os.path.getsize(Files[f]))
-            PresentDate.append(os.path.getctime(Files[f]))
-            # FSizes.append(SourceDir + Files[f])
-            f +=1
-
-    # print(len(PresentName))
-
-Attributes()
+PresentName, PresentSize, PresentDate, MissingName = propertyCheck(Files, SourceDir)
 
 ##########################################################################################################################
 #Code to Exit Program
