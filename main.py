@@ -3,14 +3,17 @@ import openpyxl
 import shutil
 import calendar
 import os
-from modules.greeting import hello
 from modules.fileSelect import files, folders
 from modules.propCheck import propertyCheck
+from modules.intro import userIntro
+from modules.docCustomization import userCommand
 
 FileName, FileNumber, Files, Cash_name, Sched_name, Sales_name, Invoice_name = files()
 SourceDir, PrevDir, cwf, DestDir = folders()
 
 PresentName, PresentSize, PresentDate, MissingName = propertyCheck(Files, SourceDir)
+
+
 
 ##########################################################################################################################
 #Code to Exit Program
@@ -63,6 +66,9 @@ def CloseProgram(Exitcmd):
 
 ##########################################################################################################################
 
+userIntro(MissingName, PresentName, Files, DestDir)
+
+
 print("\nThis is a directory building program.")
 print("If you want to stop this program, type stop or exit, or press 'CTRL' + 'C' at any time\n")
 
@@ -98,6 +104,11 @@ print("\nThe Destination Directory is:\n" + DestDir + "\n\n")
 #     print(Files[f] + "\n")
 #     f +=1
       
+##########################################################################################################################
+
+Userinput, year, yearpath, sourcepath, Answer, response = userCommand(DestDir, SourceDir)
+
+
 
 while True:
     try:
@@ -151,6 +162,9 @@ while True:
 
     
 #month = int(input("What month do you want to start from? "))
+
+
+##########################################################################################################################
 
 
 # while year < 0:
