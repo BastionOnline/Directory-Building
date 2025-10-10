@@ -11,20 +11,45 @@ from modules.createDirectory import dirCreation
 from modules.scheduleBuilder import excelCreator
 
 
-jsonPath="path"
-
 class Api:
     # load json file path
-    def __init__(self, jsonPath="path"):
-        self.jsonPath = jsonPath
+    def __init__(self):
+        self.balanceFilePath = None
+        self.scheduleFilePath = None
+        self.salesFilePath = None
+        self.invoiceFilePath = None
     
-    def selectFile(self):
-        self.file_path = filedialog.askopenfilename(
-            title="Choose a excel file",
+    def selectBalanceFile(self):
+        self.balanceFilePath = filedialog.askopenfilename(
+            title="Select a Balance file",
             filetypes=[("Excel Files", "*.xls *.xlsx")]
         )
-        print(self.file_path)
-        return self.file_path
+        print(self.balanceFilePath)
+        return self.balanceFilePath
+    
+    def selectScheduleFile(self):
+        self.scheduleFilePath = filedialog.askopenfilename(
+            title="Select a Schedule file",
+            filetypes=[("Excel Files", "*.xls *.xlsx")]
+        )
+        print(self.scheduleFilePath)
+        return self.scheduleFilePath
+    
+    def selectSalesFile(self):
+        self.salesFilePath = filedialog.askopenfilename(
+            title="Select a Balance file",
+            filetypes=[("Excel Files", "*.xls *.xlsx")]
+        )
+        print(self.salesFilePath)
+        return self.salesFilePath
+    
+    def selectInvoiceFile(self):
+        self.invoiceFilePath = filedialog.askopenfilename(
+            title="Select a Balance file",
+            filetypes=[("Excel Files", "*.xls *.xlsx")]
+        )
+        print(self.invoiceFilePath)
+        return self.invoiceFilePath
 
 # need to initialize api before debugging
 # api = Api(jsonPath)
@@ -58,6 +83,9 @@ if __name__ == '__main__':
     webview.create_window("Directory Builder", f"file://{html_file}", js_api=api)
     webview.start()
 
+
+path = api.balanceFilePath
+print(path)
 
 
 # Determine files and folders
