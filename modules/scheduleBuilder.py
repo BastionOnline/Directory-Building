@@ -1,11 +1,12 @@
 import openpyxl
-from datetime import date, timedelta
+from datetime import timedelta
 import os
 import shutil
+from modules.statusUpdate import status
 
-def update(numbermonths, FileName, YearDir, countdot, SourceDir, Files, PeriodStart, TotalWeeks):
+def excelCreator(numbermonths, FileName, YearDir, countdot, SourceDir, Files, PeriodStart, TotalWeeks):
+    
     # Schedule Adjustment
-
     def ShedUpdate(FileDir, File, MY):
 
         #this will print month and day without leading 0's, ie. Feb 4, %e did not work, left a space in its' place
@@ -15,7 +16,6 @@ def update(numbermonths, FileName, YearDir, countdot, SourceDir, Files, PeriodSt
         print("Updating excel " + File + " to " + MonYear + "...")
 
         workbook = openpyxl.load_workbook(FileDir)
-        # shutil.copy("C:/My Stuff/work/coding projects/Small Projects/3. Sales.xlsx", "C:/My Stuff/work/coding projects/Small Projects/3. Sales-test.xlsx")
 
         sheet = workbook['Yearly Calendar']
         cell = sheet['B2']
@@ -25,15 +25,14 @@ def update(numbermonths, FileName, YearDir, countdot, SourceDir, Files, PeriodSt
         workbook.save(FileDir)
         print("Sales file updated to " + MonYear + " and saved to\n" + FileDir)
 
-    #####################################################################################################################################
-
-    # UPDATING PORTION
 
 
-    def Move(PeriodStart, TotalWeeks, FileNumber):
+    # Create custom files
+    def createFile(PeriodStart, TotalWeeks, FileNumber):
         period = 0
 
         while period < TotalWeeks:
+            status(period, TotalWeeks-1, "Schedules created")
             #print("period is", period, "Count is", count)
             CurWeek = PeriodStart + timedelta(weeks=period)
             EndWeek = CurWeek + timedelta(days=6)
@@ -42,10 +41,6 @@ def update(numbermonths, FileName, YearDir, countdot, SourceDir, Files, PeriodSt
             EndMInt = int(EndWeek.strftime('%m'))
             #prints the day value
 
-
-            # finaldest = numbermonths[EndMInt-1] + "\\" + FileNumber + ". " + FileName[FileNumber]
-            # finaldest = numbermonths[EndMInt-1] + "\\4. Invoices\\"
-            
             # location = 1. january > 1. Cash - Balances
             MInShedFold = os.path.join(numbermonths[EndMInt-1], str(FileNumber+1) + ". " + FileName[FileNumber])
             print(MInShedFold)
@@ -93,7 +88,4 @@ def update(numbermonths, FileName, YearDir, countdot, SourceDir, Files, PeriodSt
                     period +=1
 
 
-
-    Move(PeriodStart, TotalWeeks, 1)
-    Move(PeriodStart, TotalWeeks, 3)
-
+    createFile(PeriodStart, TotalWeeks, 1)

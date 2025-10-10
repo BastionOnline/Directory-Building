@@ -7,16 +7,10 @@ def files():
     FileNumber = range(6)
     # for FileNumber in FileNumber:
     #     print(FileNumber)
-    Files = ["1. Cash - Balance.xlsx", "2. Schedules.xlsx", "3. Sales.xlsx", "4. Invoices.xlsx", "5. Hotel - Schedule.xlsx", "6. Monthly DB Builder.exe", "7. DB Reader.exe", "8. Yearly DB Builder.exe"]
+    Files = ["1. Cash - Balance.xlsx", "2. Schedules.xlsx", "3. Sales.xlsx", "4. Invoices.xlsx", "5. Hotel - Schedule.xlsx"]
 
     # for t in Files:
     #     print(t)
-
-    # file_name = input("What is the file name? \n")
-    # file_ext = input("What is the file extenstion? \n.")
-    # Name_Ext = (file_name + "." + file_ext)
-
-    #Name_Ext = "WIY.xlsx"
 
     Cash_name = Files[0]
     Sched_name = Files[1]
@@ -30,26 +24,9 @@ def files():
     # Invoice_name = input("What is the name of the invoice? ")
     # Sched_name = input("What is the name of the Schedule? ")
 
-
     return FileName, FileNumber, Files, Cash_name, Sched_name, Sales_name, Invoice_name
 
 def folders():
-    #SourceDir = 'C:\\My Stuff\\work\\coding projects\\'
-    # # Dest_Main = 'C:\\My Stuff\\work\\coding projects\\November\\'
-    # # Dest_Temp = 'C:\\My Stuff\\work\\coding projects\\owstuff\\'
-    # # Dest_Yearly = 'C:\\My Stuff\\work\\coding projects\\Nowstuff\\'
-    #DestTest = 'C:\\My Stuff\\work\\coding projects\\Nowstuff\\'
-
-
-
-    # current = os.getcwd()
-
-    # print(os.path.split(current))
-
-    # root, work = os.path.split(current)
-
-    # print("This is root " + root)
-    # print("This is work " + work)
 
 
     SourceDir = os.getcwd() + "\\"

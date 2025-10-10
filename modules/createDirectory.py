@@ -1,9 +1,9 @@
-from datetime import date, timedelta
+from datetime import date
 import calendar
 import os
 import openpyxl
 import shutil
-
+from modules.statusUpdate import status
 
 def dirCreation(DestDir, year, Files, SourceDir, response):
     ###################################################################################################################################
@@ -17,7 +17,6 @@ def dirCreation(DestDir, year, Files, SourceDir, response):
         print("\nUpdating excel Sales file to " + MY + "...")
 
         workbook = openpyxl.load_workbook(inputfile)
-        # shutil.copy("C:/My Stuff/work/coding projects/Small Projects/3. Sales.xlsx", "C:/My Stuff/work/coding projects/Small Projects/3. Sales-test.xlsx")
 
         sheet = workbook['Yearly Calendar']
         cell = sheet['B2']
@@ -75,9 +74,9 @@ def dirCreation(DestDir, year, Files, SourceDir, response):
     i = 0
 
     while i < 12:
+        status(i, 11, "Directories created")
+
         MonthDir = os.path.join(YearDir, numbermonths[i])
-        # print(MonthDir)
-        
         if os.path.exists(MonthDir):
             print(numbermonths[i] + " folder already exists")
         else:
@@ -101,17 +100,7 @@ def dirCreation(DestDir, year, Files, SourceDir, response):
         else:
             os.mkdir(SalesDir)
 
-            # print("sources: " + os.getcwd() + Files[2])
-            # print("Destination: " + MonthDir + calendar.month_name[i+1] + " Sales.xlsx" )
-
-            # print(SourceDir + "\\" + Files[2])
-            # print(SalesDir + "\\" + calendar.month_name[i+1] + " Monthly Sales.xlsx")
             shutil.copyfile(SourceDir + "\\" + Files[2], SalesDir + "\\" + calendar.month_name[i+1] + " Monthly Sales.xlsx" )
-
-            # DB Builder program
-            shutil.copyfile(SourceDir + "\\" + Files[5], SalesDir + "\\" + "1. DB Builder.exe")
-            shutil.copyfile(SourceDir + "\\" + Files[6], SalesDir + "\\" + "2. DB Reader.exe")
-
 
             # Info for Sales update
             currentMY = monthabv[i] + " " + str(year)
