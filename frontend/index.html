@@ -3,17 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/style.css" type="text/css">
     <title>Directory Builder</title>
 </head>
 <body>
     <h1>Select Templates</h1>
+    
     <button id="balanceFileInput">Select Balance Template</button>
+    <h3 id="balanceFileInputStatus">upload</h3>
     <button id="scheduleFileInput">Select Schedule Template</button>
     <button id="saleFileInput">Select Sales Template</button>
     <button id="invoiceFileInput">Select Invoice Template</button>
+    <button id="destionationFolderInput">Select location</button>
     <button>true or false</button>
-    <button>select year</button>
+    <!-- user selects input, js eventlistener, change sends it to python -->
+    <input type="date" id="year" name="year">
     <button id="build">Build Directory</button>
+    
     <script src="./assets/script.js"></script>
 </body>
 </html>

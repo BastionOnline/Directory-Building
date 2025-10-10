@@ -50,6 +50,13 @@ class Api:
         )
         print(self.invoiceFilePath)
         return self.invoiceFilePath
+    
+    def selectDestinationFolder(self):
+        self.destinationFolderPath = filedialog.askdirectory(
+            title="Select a Folder"
+        )
+        print(self.invoiceFilePath)
+        return self.invoiceFilePath
 
 # need to initialize api before debugging
 # api = Api(jsonPath)
@@ -99,6 +106,7 @@ userIntro(MissingName, PresentName, Files, DestDir)
 
 Userinput, year, yearpath, sourcepath, Answer, response = userCommand(DestDir, SourceDir)
 
+#Automation
 # Date and ranges created
 countdot, PeriodStart, TotalWeeks = customizeDate(year)
 
