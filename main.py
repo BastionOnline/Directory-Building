@@ -1,6 +1,7 @@
 import webview
 import os
 import sys
+import threading
 from datetime import datetime
 
 from tkinter import filedialog
@@ -29,6 +30,9 @@ class Api:
         self.files = None
         self.nameExcel = None
         self.nameSolo = None
+        self.nameNumberedExcel = None
+        self.window = None
+
 
     def selectBalanceFile(self):
         self.balanceFilePath = filedialog.askopenfilename(
@@ -83,28 +87,35 @@ class Api:
         return self.destinationFolderPath
     
     def dateSelection(self, dateInput):
-        dateObj = datetime.strptime(dateInput, "%Y-%m-%d")
-        self.yearValue = dateObj.year
+        # dateObj = datetime.strptime(dateInput, "%Y-%m-%d")
+        # self.yearValue = dateObj.year
+        self.yearValue = dateInput
 
         print(self.yearValue)
         return self.yearValue
     
     def initializeBuildDirectory(self):
+        def startThreading():
+            self.sourceDir, self.files, self.nameExcel, self.nameSolo, self.nameNumberedExcel = initTemplate(self)
 
-        self.sourceDir, self.files, self.nameExcel, self.nameSolo, self.nameNumberedExcel = initTemplate(self)
+            DestDir = self.destinationFolderPath
+            SourceDir = self.sourceDir
+            FileName = self.nameSolo
+            Files = self.nameNumberedExcel
+            year = self.yearValue
+            response = self.customizeDateBool
 
-        DestDir = self.destinationFolderPath
-        SourceDir = self.sourceDir
-        FileName = self.nameSolo
-        Files = self.nameNumberedExcel
-        year = self.yearValue
-        response = self.customizeDateBool
+            automation(DestDir, SourceDir, FileName, Files, year, response, self)
 
-        automation(DestDir, SourceDir, FileName, Files, year, response, self)
+        threading.Thread(target=startThreading).start()
 
         return
         
-        
+# table for ui
+# create progress bar
+# change date input to year
+# setup json
+#     
 
 # need to initialize api before debugging
 
@@ -136,31 +147,3 @@ if __name__ == '__main__':
     webview.create_window("Directory Builder", f"file://{html_file}", js_api=api)
     webview.start()
 
-
-# # print(api.yearValue)
-# DestDir=api.destinationFolderPath
-# SourceDir=api.sourceDir
-# FileName=api.nameSolo
-# Files=api.nameExcel
-# year=api.yearValue
-# response=api.customizeDateBool
-
-
-# User Inputs
-# Determine files and folders
-# FileName, FileNumber, Files, Cash_name, Sched_name, Sales_name, Invoice_name = files()
-# SourceDir, PrevDir, cwf, DestDir = folders()
-# PresentName, PresentSize, PresentDate, MissingName = propertyCheck(Files, SourceDir)
-# userIntro(MissingName, PresentName, Files, DestDir)
-# Userinput, year, yearpath, sourcepath, Answer, response = userCommand(DestDir, SourceDir)
-
-
-# #Automation
-# # Date and ranges created
-# countdot, PeriodStart, TotalWeeks = customizeDate(year)
-
-# # Create files and configure them
-# numbermonths, YearDir = dirCreation(DestDir, year, Files, SourceDir, response)
-
-# # Makes Custom dates on file copies
-# excelCreator(numbermonths, FileName, YearDir, countdot, SourceDir, Files, PeriodStart, TotalWeeks)
