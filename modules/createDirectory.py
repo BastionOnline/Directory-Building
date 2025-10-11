@@ -108,7 +108,8 @@ def dirCreation(DestDir, year, Files, SourceDir, response):
             
             currentMon = date(year, int(i+1), 1)
 
-            if response == "yes":
+            # if response == "yes":
+            if response == True:
                 NewSalesName = xlSales(SalesDir + "\\", calendar.month_name[i+1] + " Monthly Sales.xlsx", currentMY, currentMon)
 
         InvoiceDir = os.path.join(MonthDir, "4. Invoices")

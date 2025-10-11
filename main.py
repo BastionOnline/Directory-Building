@@ -1,6 +1,9 @@
 import webview
 import os
 import sys
+import shutil
+from datetime import date, datetime
+
 from tkinter import filedialog
 from modules.fileSelect import files, folders
 from modules.propCheck import propertyCheck
@@ -10,6 +13,7 @@ from modules.dateCalculation import customizeDate
 from modules.createDirectory import dirCreation
 from modules.scheduleBuilder import excelCreator
 
+fileGrouping = []
 
 class Api:
     # load json file path
@@ -18,7 +22,11 @@ class Api:
         self.scheduleFilePath = None
         self.salesFilePath = None
         self.invoiceFilePath = None
-    
+        self.hotelFilePath = None
+        self.destinationFolderPath = None
+        self.yearValue = None
+        self.customizeDateBool = None
+
     def selectBalanceFile(self):
         self.balanceFilePath = filedialog.askopenfilename(
             title="Select a Balance file",
@@ -37,30 +45,77 @@ class Api:
     
     def selectSalesFile(self):
         self.salesFilePath = filedialog.askopenfilename(
-            title="Select a Balance file",
+            title="Select a Sales file",
             filetypes=[("Excel Files", "*.xls *.xlsx")]
         )
         print(self.salesFilePath)
         return self.salesFilePath
     
+    def customizeDate(self, bool):
+        self.customizeDateBool = bool
+        print(bool, type(bool))
+        return self.customizeDateBool
+    
     def selectInvoiceFile(self):
         self.invoiceFilePath = filedialog.askopenfilename(
-            title="Select a Balance file",
+            title="Select a Invoice file",
             filetypes=[("Excel Files", "*.xls *.xlsx")]
         )
         print(self.invoiceFilePath)
         return self.invoiceFilePath
     
+    def selectHotelFile(self):
+        self.hotelFilePath = filedialog.askopenfilename(
+            title="Select a Hotel file",
+            filetypes=[("Excel Files", "*.xls *.xlsx")]
+        )
+
     def selectDestinationFolder(self):
         self.destinationFolderPath = filedialog.askdirectory(
-            title="Select a Folder"
+            title="Select a Folder For New Yearly Directory"
         )
-        print(self.invoiceFilePath)
-        return self.invoiceFilePath
+        print(self.destinationFolderPath)
+        return self.destinationFolderPath
+    
+    def dateSelection(self, dateInput):
+        dateObj = datetime.strptime(dateInput, "%Y-%m-%d")
+        self.yearValue = dateObj.year
+
+        print(self.yearValue)
+        return self.yearValue
+    
+    def initializeBuildDirectory(self):
+        # check if templates exist in current directory, if not, make one
+
+        # check if files exist
+        
+
+        # make templates folder and copy files there
+        fileGrouping.append([["Balance"], ["Balance.xlsx"], ["1. Balance.xlsx"], [self.balanceFilePath]])
+        fileGrouping.append([["Schedules"], ["Schedules.xlsx"], ["2. Schedules.xlsx"], [self.scheduleFilePath]])
+        # fileGrouping.append([["Sales"], ["Sales.xlsx"], ["3. Sales.xlsx"], [self.salesFilePath]])
+        # fileGrouping.append([["Invoices"], ["Invoices.xlsx"], ["4. Invoices.xlsx"], [self.invoiceFilePath]])
+        # fileGrouping.append([["Hotel - Schedule"], ["Hotel - Schedule.xlsx"], ["5. Hotel - Schedule.xlsx"], [self.hotelFilePath]])
+
+        templatePath = os.getcwd() + "\\templates\\" + fileGrouping[1][2][0]
+        os.path.exists(templatePath)
+        samplePath = os.path.exists(self.balanceFilePath)
+
+        # if templatePath & samplePath == True:
+        #     print("nice")
+
+        # print(templatePath)
+        
+        shutil.copyfile(self.balanceFilePath, templatePath)
+        print("finished")
+        
+        # print(status, item)
+
+        return
+        
+        
 
 # need to initialize api before debugging
-# api = Api(jsonPath)
-# print(Api.loadUserDefaults(api, "whisper")) # returns true, debug looks in project folder, not src
 
 def resource_path(relative_path):
     """ Get the absolute path to a resource, works for dev and for PyInstaller """
@@ -91,8 +146,7 @@ if __name__ == '__main__':
     webview.start()
 
 
-path = api.balanceFilePath
-print(path)
+# print(api.yearValue)
 
 
 # Determine files and folders

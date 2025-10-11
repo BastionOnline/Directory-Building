@@ -8,17 +8,25 @@
 </head>
 <body>
     <h1>Select Templates</h1>
-    
+
+    <input type="checkbox" id="customDate" name="customDate">    
+
     <button id="balanceFileInput">Select Balance Template</button>
     <h3 id="balanceFileInputStatus">upload</h3>
     <button id="scheduleFileInput">Select Schedule Template</button>
     <button id="saleFileInput">Select Sales Template</button>
+    <label>
+        <input type="date" id="dateInput" name="dateInput">
+        Customize Dates on sale Document
+    </label>
     <button id="invoiceFileInput">Select Invoice Template</button>
     <button id="destionationFolderInput">Select location</button>
-    <button>true or false</button>
+    <button id="hotelFileInput">Select Hotel Template</button>
     <!-- user selects input, js eventlistener, change sends it to python -->
-    <input type="date" id="year" name="year">
+
     <button id="build">Build Directory</button>
+
+    <h3 id="progress"></h3>
     
     <script src="./assets/script.js"></script>
 </body>
