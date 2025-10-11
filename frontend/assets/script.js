@@ -1,6 +1,10 @@
 document.addEventListener("DOMContentLoaded", async () => {
     const balanceBtn = document.getElementById("balanceFileInput")
     const scheduleBtn = document.getElementById("scheduleFileInput")
+    const saleBtn = document.getElementById("saleFileInput")
+    const invoiceBtn = document.getElementById("invoiceFileInput")
+    const destinationFolderBtn = document.getElementById("destionationFolderInput")
+    const hotelBtn = document.getElementById("hotelFileInput")    
     const dateInput = document.getElementById("dateInput")
     const customDate = document.getElementById("customDate")
 
@@ -26,6 +30,38 @@ document.addEventListener("DOMContentLoaded", async () => {
         try {
             const scheduleStat = window.pywebview.api.selectScheduleFile()
         } catch (error) {
+
+        }
+    })
+
+    saleBtn.addEventListener("click", async () => {
+        try {
+            const saleStatus = window.pywebview.api.selectSalesFile()
+        } catch {
+
+        }
+    })
+
+    invoiceBtn.addEventListener("click", async () => {
+        try {
+            const invoiceStatus = window.pywebview.api.selectInvoiceFile()
+        } catch {
+
+        }
+    })    
+
+    destinationFolderBtn.addEventListener("click", async () => {
+        try {
+            const destinationStatus = window.pywebview.api.selectDestinationFolder()
+        } catch {
+
+        }
+    })    
+
+    hotelBtn.addEventListener("click", async () => {
+        try {
+            const hotelStatus = window.pywebview.api.selectHotelFile()
+        } catch {
 
         }
     })

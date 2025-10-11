@@ -12,6 +12,7 @@ from modules.dateCalculation import customizeDate
 from modules.createDirectory import dirCreation
 from modules.scheduleBuilder import excelCreator
 from modules.templateSetup import initTemplate
+from modules.automation import automation
 
 class Api:
     # load json file path
@@ -24,6 +25,10 @@ class Api:
         self.destinationFolderPath = None
         self.yearValue = None
         self.customizeDateBool = None
+        self.sourceDir = None
+        self.files = None
+        self.nameExcel = None
+        self.nameSolo = None
 
     def selectBalanceFile(self):
         self.balanceFilePath = filedialog.askopenfilename(
@@ -67,6 +72,8 @@ class Api:
             title="Select a Hotel file",
             filetypes=[("Excel Files", "*.xls *.xlsx")]
         )
+        print(self.hotelFilePath)
+        return self.hotelFilePath
 
     def selectDestinationFolder(self):
         self.destinationFolderPath = filedialog.askdirectory(
@@ -85,6 +92,15 @@ class Api:
     def initializeBuildDirectory(self):
 
         self.sourceDir, self.files, self.nameExcel, self.nameSolo = initTemplate(self)
+
+        DestDir = self.destinationFolderPath
+        SourceDir = self.sourceDir
+        FileName = self.nameSolo
+        Files = self.nameExcel
+        year = self.yearValue
+        response = self.customizeDateBool
+
+        automation(DestDir, SourceDir, FileName, Files, year, response)
 
         return
         
@@ -121,32 +137,30 @@ if __name__ == '__main__':
     webview.start()
 
 
-# print(api.yearValue)
-DestDir=api.destinationFolderPath
-SourceDir=api.sourceDir
-FileName=api.nameSolo
-Files=api.nameExcel
-year=api.yearValue
-response=api.customizeDateBool
+# # print(api.yearValue)
+# DestDir=api.destinationFolderPath
+# SourceDir=api.sourceDir
+# FileName=api.nameSolo
+# Files=api.nameExcel
+# year=api.yearValue
+# response=api.customizeDateBool
 
 
+# User Inputs
 # Determine files and folders
-FileName, FileNumber, Files, Cash_name, Sched_name, Sales_name, Invoice_name = files()
-SourceDir, PrevDir, cwf, DestDir = folders()
+# FileName, FileNumber, Files, Cash_name, Sched_name, Sales_name, Invoice_name = files()
+# SourceDir, PrevDir, cwf, DestDir = folders()
+# PresentName, PresentSize, PresentDate, MissingName = propertyCheck(Files, SourceDir)
+# userIntro(MissingName, PresentName, Files, DestDir)
+# Userinput, year, yearpath, sourcepath, Answer, response = userCommand(DestDir, SourceDir)
 
-PresentName, PresentSize, PresentDate, MissingName = propertyCheck(Files, SourceDir)
 
+# #Automation
+# # Date and ranges created
+# countdot, PeriodStart, TotalWeeks = customizeDate(year)
 
-userIntro(MissingName, PresentName, Files, DestDir)
+# # Create files and configure them
+# numbermonths, YearDir = dirCreation(DestDir, year, Files, SourceDir, response)
 
-Userinput, year, yearpath, sourcepath, Answer, response = userCommand(DestDir, SourceDir)
-
-#Automation
-# Date and ranges created
-countdot, PeriodStart, TotalWeeks = customizeDate(year)
-
-# Create files and configure them
-numbermonths, YearDir = dirCreation(DestDir, year, Files, SourceDir, response)
-
-# Makes Custom dates on file copies
-excelCreator(numbermonths, FileName, YearDir, countdot, SourceDir, Files, PeriodStart, TotalWeeks)
+# # Makes Custom dates on file copies
+# excelCreator(numbermonths, FileName, YearDir, countdot, SourceDir, Files, PeriodStart, TotalWeeks)

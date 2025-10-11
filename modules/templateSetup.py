@@ -11,9 +11,9 @@ def initTemplate(self):
     # make templates folder and copy files there
     fileGrouping.append([["Balance"], ["Balance.xlsx"], ["1. Balance.xlsx"], [self.balanceFilePath]])
     fileGrouping.append([["Schedules"], ["Schedules.xlsx"], ["2. Schedules.xlsx"], [self.scheduleFilePath]])
-    # fileGrouping.append([["Sales"], ["Sales.xlsx"], ["3. Sales.xlsx"], [self.salesFilePath]])
-    # fileGrouping.append([["Invoices"], ["Invoices.xlsx"], ["4. Invoices.xlsx"], [self.invoiceFilePath]])
-    # fileGrouping.append([["Hotel - Schedule"], ["Hotel - Schedule.xlsx"], ["5. Hotel - Schedule.xlsx"], [self.hotelFilePath]])
+    fileGrouping.append([["Sales"], ["Sales.xlsx"], ["3. Sales.xlsx"], [self.salesFilePath]])
+    fileGrouping.append([["Invoices"], ["Invoices.xlsx"], ["4. Invoices.xlsx"], [self.invoiceFilePath]])
+    fileGrouping.append([["Hotel - Schedule"], ["Hotel - Schedule.xlsx"], ["5. Hotel - Schedule.xlsx"], [self.hotelFilePath]])
 
     templateFolderDir = os.path.join(os.getcwd(), "templates")
 
@@ -41,8 +41,8 @@ def initTemplate(self):
 
     for file in fileGrouping:
         print(file[1][0])
-        nameExcel.push(file[1][0])
-        nameSolo.push(file[0][0])
+        nameExcel.append(file[1][0])
+        nameSolo.append(file[0][0])
 
     print(nameSolo)
 
