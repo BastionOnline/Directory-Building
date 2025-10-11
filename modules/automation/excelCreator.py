@@ -2,7 +2,7 @@ import openpyxl
 from datetime import timedelta
 import os
 import shutil
-from modules.statusUpdate import status
+from modules.automation.statusUpdate import status
 
 def excelCreator(numbermonths, FileName, YearDir, countdot, SourceDir, Files, PeriodStart, TotalWeeks):
     

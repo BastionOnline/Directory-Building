@@ -78,7 +78,7 @@ def dirCreation(DestDir, year, Files, SourceDir, response, self):
     i = 0
 
     while i < 12:
-        status(i, 11, "Directories created")
+        status(i, 11, "Directories created", self)
 
         MonthDir = os.path.join(YearDir, numbermonths[i])
         if os.path.exists(MonthDir):

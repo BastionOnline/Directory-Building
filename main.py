@@ -2,17 +2,9 @@ import webview
 import os
 import sys
 import threading
-from datetime import datetime
 
 from tkinter import filedialog
-from modules.fileSelect import files, folders
-from modules.propCheck import propertyCheck
-from modules.intro import userIntro
-from modules.docCustomization import userCommand
-from modules.dateCalculation import customizeDate
-from modules.createDirectory import dirCreation
-from modules.scheduleBuilder import excelCreator
-from modules.templateSetup import initTemplate
+from modules.automation.templateSetup import initTemplate
 from modules.automation import automation
 
 class Api:
@@ -87,8 +79,6 @@ class Api:
         return self.destinationFolderPath
     
     def dateSelection(self, dateInput):
-        # dateObj = datetime.strptime(dateInput, "%Y-%m-%d")
-        # self.yearValue = dateObj.year
         self.yearValue = dateInput
 
         print(self.yearValue)
@@ -107,7 +97,9 @@ class Api:
 
             automation(DestDir, SourceDir, FileName, Files, year, response, self)
 
-        threading.Thread(target=startThreading).start()
+        threading.Thread(target=startThreading, daemon=True).start()
+        # Use daemon=True for background work like progress updates, file automation, etc., where it’s OK to stop when the app closes.
+        # Use daemon=False if the task must complete before the program exits (e.g., saving files, database writes, etc.).
 
         return
         
@@ -144,6 +136,9 @@ if __name__ == '__main__':
     api = Api()
 
     # Open the HTML file in a webview window
-    webview.create_window("Directory Builder", f"file://{html_file}", js_api=api)
+    window = webview.create_window("Directory Builder", f"file://{html_file}", js_api=api)
+    
+    # Set the api self.window so python can push to it
+    api.set_window(window)
     webview.start()
 

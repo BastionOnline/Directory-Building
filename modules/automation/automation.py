@@ -1,15 +1,6 @@
-from modules.dateCalculation import customizeDate
-from modules.createDirectory import dirCreation
-from modules.scheduleBuilder import excelCreator
-
-# DestDir=api.destinationFolderPath
-# SourceDir=api.sourceDir
-# FileName=api.nameSolo
-# Files=api.nameExcel
-# year=api.yearValue
-# response=api.customizeDateBool
-
-
+from modules.automation.customizeDate import customizeDate
+from modules.automation.dirCreation import dirCreation
+from modules.automation.excelCreator import excelCreator
 
 def automation(DestDir, SourceDir, FileName, Files, year, response, self):
     #Automation
