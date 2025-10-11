@@ -36,6 +36,7 @@ def initTemplate(self):
     
     print("finished")
 
+    nameNumberedExcel = []
     nameExcel = []
     nameSolo = []
 
@@ -43,7 +44,8 @@ def initTemplate(self):
         print(file[1][0])
         nameExcel.append(file[1][0])
         nameSolo.append(file[0][0])
+        nameNumberedExcel.append(file[2][0])
 
     print(nameSolo)
 
-    return templateFolderDir, fileGrouping, nameExcel, nameSolo
+    return templateFolderDir, fileGrouping, nameExcel, nameSolo, nameNumberedExcel

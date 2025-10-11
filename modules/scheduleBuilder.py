@@ -50,7 +50,9 @@ def excelCreator(numbermonths, FileName, YearDir, countdot, SourceDir, Files, Pe
             
             DraftDir = os.path.join(InSchedDir, "Draft")
             FileDir = InSchedDir + "\\" + countdot[period] + " - " + FileName[FileNumber] + ".xlsx"
-            SourceFile = SourceDir + str(Files[FileNumber])
+            SourceFile = os.path.join(SourceDir, str(Files[FileNumber]))
+            print(SourceFile)
+            # SourceFile = SourceDir + str(Files[FileNumber])
 
             if os.path.exists(FileDir):
                 print(FileDir + " already exists.\n File moved to Draft folder. \n\n")

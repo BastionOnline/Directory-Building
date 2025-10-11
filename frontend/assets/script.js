@@ -10,17 +10,17 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const buildBtn = document.getElementById("build")
 
-    customDate.checked = true;
+    // customDate.checked = true;
 
     balanceBtn.addEventListener("click", async () => {
         try{
             const balanceFilePath = await window.pywebview.api.selectBalanceFile()
 
-            if (!balanceFilePath) {
-                alert("Balance File not selected")
-            } else {
-                alert("Balance File Selected")
-            }
+            // if (!balanceFilePath) {
+            //     alert("Balance File not selected")
+            // } else {
+            //     alert("Balance File Selected")
+            // }
         } catch (err) {
             alert("File selection failed:", err);
             // status.textContent = "❌ File selection failed.";
@@ -73,9 +73,9 @@ document.addEventListener("DOMContentLoaded", async () => {
             
             const dateSet = await window.pywebview.api.dateSelection(dateValue)
             
-            alert("value changed!")
+            // alert("value changed!")
         } catch (err) {
-            alert("year selection error: ", err);
+            // alert("year selection error: ", err);
         }
     })
 
@@ -89,7 +89,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     
     customDate.addEventListener("change", async () => {
         try {
-            alert(customDate.checked)
+            // alert(customDate.checked)
 
             customDateChoice = customDate.checked;
 

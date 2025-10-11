@@ -5,7 +5,7 @@ import openpyxl
 import shutil
 from modules.statusUpdate import status
 
-def dirCreation(DestDir, year, Files, SourceDir, response):
+def dirCreation(DestDir, year, Files, SourceDir, response, self):
     ###################################################################################################################################
     #This formats xl
 
@@ -67,6 +67,10 @@ def dirCreation(DestDir, year, Files, SourceDir, response):
             shutil.copyfile(SourceDir + "\\" + Files[4],  HotelDir + "\\" + "Hotel - Schedule.xlsx")
     else:
         os.mkdir(HotelDir)
+
+        print(SourceDir + "\\" + Files[4])
+        print(HotelDir + "\\" + "Hotel - Schedule.xlsx")
+
         shutil.copyfile(SourceDir + "\\" + Files[4], HotelDir + "\\" + "Hotel - Schedule.xlsx")
 
 

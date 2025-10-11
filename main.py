@@ -91,16 +91,16 @@ class Api:
     
     def initializeBuildDirectory(self):
 
-        self.sourceDir, self.files, self.nameExcel, self.nameSolo = initTemplate(self)
+        self.sourceDir, self.files, self.nameExcel, self.nameSolo, self.nameNumberedExcel = initTemplate(self)
 
         DestDir = self.destinationFolderPath
         SourceDir = self.sourceDir
         FileName = self.nameSolo
-        Files = self.nameExcel
+        Files = self.nameNumberedExcel
         year = self.yearValue
         response = self.customizeDateBool
 
-        automation(DestDir, SourceDir, FileName, Files, year, response)
+        automation(DestDir, SourceDir, FileName, Files, year, response, self)
 
         return
         
