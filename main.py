@@ -1,8 +1,7 @@
 import webview
 import os
 import sys
-import shutil
-from datetime import date, datetime
+from datetime import datetime
 
 from tkinter import filedialog
 from modules.fileSelect import files, folders
@@ -12,8 +11,7 @@ from modules.docCustomization import userCommand
 from modules.dateCalculation import customizeDate
 from modules.createDirectory import dirCreation
 from modules.scheduleBuilder import excelCreator
-
-fileGrouping = []
+from modules.templateSetup import initTemplate
 
 class Api:
     # load json file path
@@ -85,31 +83,8 @@ class Api:
         return self.yearValue
     
     def initializeBuildDirectory(self):
-        # check if templates exist in current directory, if not, make one
 
-        # check if files exist
-        
-
-        # make templates folder and copy files there
-        fileGrouping.append([["Balance"], ["Balance.xlsx"], ["1. Balance.xlsx"], [self.balanceFilePath]])
-        fileGrouping.append([["Schedules"], ["Schedules.xlsx"], ["2. Schedules.xlsx"], [self.scheduleFilePath]])
-        # fileGrouping.append([["Sales"], ["Sales.xlsx"], ["3. Sales.xlsx"], [self.salesFilePath]])
-        # fileGrouping.append([["Invoices"], ["Invoices.xlsx"], ["4. Invoices.xlsx"], [self.invoiceFilePath]])
-        # fileGrouping.append([["Hotel - Schedule"], ["Hotel - Schedule.xlsx"], ["5. Hotel - Schedule.xlsx"], [self.hotelFilePath]])
-
-        templatePath = os.getcwd() + "\\templates\\" + fileGrouping[1][2][0]
-        os.path.exists(templatePath)
-        samplePath = os.path.exists(self.balanceFilePath)
-
-        # if templatePath & samplePath == True:
-        #     print("nice")
-
-        # print(templatePath)
-        
-        shutil.copyfile(self.balanceFilePath, templatePath)
-        print("finished")
-        
-        # print(status, item)
+        self.sourceDir, self.files, self.nameExcel, self.nameSolo = initTemplate(self)
 
         return
         
@@ -147,6 +122,12 @@ if __name__ == '__main__':
 
 
 # print(api.yearValue)
+DestDir=api.destinationFolderPath
+SourceDir=api.sourceDir
+FileName=api.nameSolo
+Files=api.nameExcel
+year=api.yearValue
+response=api.customizeDateBool
 
 
 # Determine files and folders
