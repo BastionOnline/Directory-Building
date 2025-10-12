@@ -1,0 +1,10 @@
+.status-box {
+    max-width: 200px;
+    border: 1px solid #ccc;
+    padding: 5px;
+    border-radius: 4px;
+    box-sizing: border-box;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}

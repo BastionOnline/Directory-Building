@@ -142,20 +142,21 @@ document.addEventListener("DOMContentLoaded", async () => {
         window.addEventListener('pywebviewready', async () => {
             try {
                 const filePropStatus = await window.pywebview.api.loadUserDefaults(fileProp);
-                alert(filePropStatus)
+                // alert(filePropStatus)
                 // alert(PyValue.location)
-                if (filePropStatus.value === true) {
+                if (filePropStatus.bool === true) {
                     // alert(`✅ ${jsonValue} found!`);
-                    setting.innerHTML = filePropStatus
+                    setting.innerHTML = filePropStatus.value
+                    return filePropStatus.value
 
                 } else {
                     setting.innerHTML = `❌ ${fileProp} needs to be set`
                     // alert(`❌ ${jsonValue} needs to be set`);
                     // const updatedValue = await window.pywebview.api.chooseDefault(jsonValue);
-                    alert(updatedValue)
+                    // alert(updatedValue)
                 }
             } catch (err) {
-                alert(`Error loading default:`, err);
+                // alert(`Error loading default:`, err);
                 // create needed key, value pair
             }
         })

@@ -46,7 +46,7 @@ def createJson():
     print(os.path.exists(jsonFile))
     if os.path.exists(jsonFile) == False:
         data = {
-            "Customize Date": "",
+            "Customize Date": "true",
             "Balance": "",
             "Schedules": "",
             "Sales": "",
@@ -93,21 +93,38 @@ def defaultCheck(jsonValue, userDefaults):
     if jsonValue in userDefaults or userDefaults[jsonValue]:
         # best way to get a json value
         path = userDefaults.get(jsonValue)
+
+        # print( "\n" + jsonValue + "\n")
+        # print("\n" + path + "\n")
+        # print(jsonValue)
+        # print(userDefaults)
+
         # tests to see if path returns None and a number
         if not path or not isinstance(path, str): # if path returns None, it is True, because None is falsy
-            # return "path issue"
             return {"location": "defaultCheck, path blank",
-                    "value":"create key, value pair"}
+                    "error":"create key, value pair",
+                    "value": path,
+                    "bool": False}
         # return f"{jsonValue} found"
         # return path
         elif (os.path.exists(path) == True):
+            # return True
             return {"location": "defaultCheck, key found, path valid", 
-                    "value": True}
+                    "error": "None",
+                    "value": path,
+                    "bool": True}
         else:
+            # return False
             return {"location": "defaultCheck, key found, path not valid",
-                    "value": "create key, value pair"}
+                    "error": "create key, value pair",
+                    "value": path,
+                    "bool": False}
     else:
-        return {"location": "defaultCheck, key not seen", "value":"create key, value pair"}
+        # return False
+        return {"location": "defaultCheck, key not seen",
+                "error":"create key, value pair",
+                "value": path,
+                "bool": False}
 
 class Api:
     def __init__(self, window, jsonPath=jsonFile):
