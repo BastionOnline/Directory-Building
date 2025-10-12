@@ -1,13 +1,12 @@
 import os
 import shutil
 
-def initTemplate(self):
+def initTemplate(self, templateFolderDir):
     fileGrouping = []
     # check if templates exist in current directory, if not, make one
 
     # check if files exist via json
     
-
     # make templates folder and copy files there
     fileGrouping.append([["Balance"], ["Balance.xlsx"], ["1. Balance.xlsx"], [self.balanceFilePath]])
     fileGrouping.append([["Schedules"], ["Schedules.xlsx"], ["2. Schedules.xlsx"], [self.scheduleFilePath]])
@@ -15,12 +14,6 @@ def initTemplate(self):
     fileGrouping.append([["Invoices"], ["Invoices.xlsx"], ["4. Invoices.xlsx"], [self.invoiceFilePath]])
     fileGrouping.append([["Hotel - Schedule"], ["Hotel - Schedule.xlsx"], ["5. Hotel - Schedule.xlsx"], [self.hotelFilePath]])
 
-    templateFolderDir = os.path.join(os.getcwd(), "templates")
-
-    templateFolderStat = os.path.exists(templateFolderDir)
-
-    if templateFolderStat == False:
-        os.mkdir(templateFolderDir)
 
     for file in fileGrouping:
         print(file[2][0])

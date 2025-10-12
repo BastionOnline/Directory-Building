@@ -10,7 +10,17 @@ document.addEventListener("DOMContentLoaded", async () => {
     const progressBar = document.getElementById("progressBar")
     const buildBtn = document.getElementById("build")
     const customDateSetting = document.getElementById("customDateSetting")
+    
     const progressStatus = document.getElementById("progressStatus")
+    const balanceStatus = document.getElementById("balanceStatus")
+    const scheduleStatus = document.getElementById("scheduleStatus")
+    const salesStatus = document.getElementById("salesStatus")
+    const invoiceStatus = document.getElementById("invoiceStatus")
+    const hotelStatus = document.getElementById("hotelStatus")
+    const destinationStatus = document.getElementById("destinationStatus")
+    
+    
+    let customDateChoice = false;
 
     customDate.checked = true;
         // customDate.click
@@ -128,8 +138,46 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     })    
 
+    async function check(fileProp, setting) {
+        window.addEventListener('pywebviewready', async () => {
+            try {
+                const filePropStatus = await window.pywebview.api.loadUserDefaults(fileProp);
+                alert(filePropStatus)
+                // alert(PyValue.location)
+                if (filePropStatus.value === true) {
+                    // alert(`✅ ${jsonValue} found!`);
+                    setting.innerHTML = filePropStatus
+
+                } else {
+                    setting.innerHTML = `❌ ${fileProp} needs to be set`
+                    // alert(`❌ ${jsonValue} needs to be set`);
+                    // const updatedValue = await window.pywebview.api.chooseDefault(jsonValue);
+                    alert(updatedValue)
+                }
+            } catch (err) {
+                alert(`Error loading default:`, err);
+                // create needed key, value pair
+            }
+        })
+    }
+
+    check("Balance", balanceStatus)
+    check("Schedules", scheduleStatus)
+    check("Sales", salesStatus)
+    check("Invoices", invoiceStatus)
+    check("Hotel - Schedule", hotelStatus)
+    check("Destination Folder", destinationStatus)
 
 })
+
+// Functions callable from Python
+// These functions are called from Python using window.evaluate_js('functionName(args)')    
+
+function handleProgress(data){
+    progressBar.value = data.progressValue
+    progressStatus.innerHTML = value.progressDescription
+}
+
 function updateProgress(value){
     progressBar.value = value
 }
