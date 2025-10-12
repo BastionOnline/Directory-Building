@@ -89,6 +89,20 @@ def loadJson(self):
     return userDefaults
 
 def defaultCheck(jsonValue, userDefaults):
+
+    if jsonValue == "Customize Date":
+        path = userDefaults.get(jsonValue)
+        if path == "true":
+            return {"location": "defaultCheck, key found, path valid", 
+                    "error": "None",
+                    "value": path,
+                    "bool": True}
+        else:
+            return {"location": "defaultCheck, key found, path not valid",
+                    "error": "create key, value pair",
+                    "value": path,
+                    "bool": False}
+
     # check if the value is inside
     if jsonValue in userDefaults or userDefaults[jsonValue]:
         # best way to get a json value

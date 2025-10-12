@@ -58,6 +58,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     buildBtn.addEventListener("click", async() => {
         try {
+            alert(jsonCustomizeDate.bool)
+            alert(jsonBalance.bool)
+            alert("stop ")
+            
             const buildStat = window.pywebview.api.initializeBuildDirectory()
         } catch (error) {
 
@@ -147,10 +151,11 @@ document.addEventListener("DOMContentLoaded", async () => {
                 if (filePropStatus.bool === true) {
                     // alert(`✅ ${jsonValue} found!`);
                     setting.innerHTML = filePropStatus.value
-                    return filePropStatus.value
+                    return filePropStatus
 
                 } else {
                     setting.innerHTML = `❌ ${fileProp} needs to be set`
+                    return filePropStatus
                     // alert(`❌ ${jsonValue} needs to be set`);
                     // const updatedValue = await window.pywebview.api.chooseDefault(jsonValue);
                     // alert(updatedValue)
@@ -162,12 +167,15 @@ document.addEventListener("DOMContentLoaded", async () => {
         })
     }
 
-    check("Balance", balanceStatus)
-    check("Schedules", scheduleStatus)
-    check("Sales", salesStatus)
-    check("Invoices", invoiceStatus)
-    check("Hotel - Schedule", hotelStatus)
-    check("Destination Folder", destinationStatus)
+    // need to track and update these values
+
+    jsonCustomizeDate = check("Customize Date", customDateSetting)
+    jsonBalance = check("Balance", balanceStatus)
+    jsonSchedules = check("Schedules", scheduleStatus)
+    jsonSales = check("Sales", salesStatus)
+    jsonInvoices = check("Invoices", invoiceStatus)
+    jsonHotel = check("Hotel - Schedule", hotelStatus)
+    jsonDestination = check("Destination Folder", destinationStatus)
 
 })
 
