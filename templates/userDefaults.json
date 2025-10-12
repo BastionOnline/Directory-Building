@@ -1,9 +1,10 @@
 {
+    "Year": 2027,
     "Customize Date": "true",
-    "Balance": "",
+    "Balance": "C:/Users/Jean/Desktop/Laptop/My Stuff/Work/Coding-Projects/Python/1.DirBuild/1. Cash - Balance.xlsx",
     "Schedules": "C:\\Users\\Jean\\Desktop\\Laptop\\My Stuff\\Work\\Coding-Projects\\Python\\1.DirBuild\\templates\\2. Schedules.xlsx",
     "Sales": "C:\\Users\\Jean\\Desktop\\Laptop\\My Stuff\\Work\\Coding-Projects\\Python\\1.DirBuild\\templates\\3. Sales.xlsx",
     "Invoices": "",
     "Hotel - Schedule": "C:\\Users\\Jean\\Desktop\\Laptop\\My Stuff\\Work\\Coding-Projects\\Python\\1.DirBuild\\templates\\5. Hotel - Schedule.xlsx",
-    "Destination Folder": ""
+    "Destination Folder": "C:/Users/Jean/Desktop/Laptop/My Stuff/Work/Coding-Projects/Python/1.DirBuild"
 }

@@ -46,6 +46,7 @@ def createJson():
     print(os.path.exists(jsonFile))
     if os.path.exists(jsonFile) == False:
         data = {
+            "Year": "",
             "Customize Date": "true",
             "Balance": "",
             "Schedules": "",
@@ -61,7 +62,7 @@ def createJson():
 
 createJson()
 
-def updateJson():
+def updateJsonExcel():
     presentExcelFiles = [
                             [["Balance"], ["1. Balance.xlsx"]],
                             [["Schedules"], ["2. Schedules.xlsx"]],
@@ -79,7 +80,11 @@ def updateJson():
             setDefault(file[0][0], "", jsonFile)
     return
 
-updateJson()
+updateJsonExcel()
+
+# def userUpdateJson(key, value):
+#     setDefault(key, value, jsonFile)
+#     return
 
 def loadJson(self):
     with open(self.jsonPath, "r") as f:
@@ -183,12 +188,35 @@ class Api:
             return {"location": "exception block",
                     "value": "create key, value pair"}
 
+    def checkUserDefaults(self, jsonValue):
+        try:
+            if os.path.exists(self.jsonPath):
+                # if there is a json file load it
+                userDefaults = loadJson(self)
+
+                # check value sent from json to see if it is present
+                print(userDefaults)
+                requestedValue = defaultCheck(jsonValue, userDefaults)
+                return requestedValue
+                # return requestedValue["bool"]                
+            else:
+                createJson()
+                requestedValue = defaultCheck(jsonValue, userDefaults)
+                return requestedValue
+            
+        except Exception as e:
+            print(e)
+            return requestedValue
+
     def selectBalanceFile(self):
         self.balanceFilePath = filedialog.askopenfilename(
             title="Select a Balance file",
             filetypes=[("Excel Files", "*.xls *.xlsx")]
         )
         print(self.balanceFilePath)
+
+        setDefault("Balance", self.balanceFilePath, jsonFile)
+
         return self.balanceFilePath
     
     def selectScheduleFile(self):
@@ -197,6 +225,9 @@ class Api:
             filetypes=[("Excel Files", "*.xls *.xlsx")]
         )
         print(self.scheduleFilePath)
+
+        setDefault("Schedules", self.scheduleFilePath, jsonFile)
+
         return self.scheduleFilePath
     
     def selectSalesFile(self):
@@ -205,11 +236,17 @@ class Api:
             filetypes=[("Excel Files", "*.xls *.xlsx")]
         )
         print(self.salesFilePath)
+
+        setDefault("Sales", self.salesFilePath, jsonFile)
+
         return self.salesFilePath
     
     def customizeDate(self, bool):
         self.customizeDateBool = bool
         print(bool, type(bool))
+
+        setDefault("Customize Date", self.customizeDateBool, jsonFile)
+
         return self.customizeDateBool
     
     def selectInvoiceFile(self):
@@ -218,6 +255,9 @@ class Api:
             filetypes=[("Excel Files", "*.xls *.xlsx")]
         )
         print(self.invoiceFilePath)
+
+        setDefault("Invoices", self.invoiceFilePath, jsonFile)
+
         return self.invoiceFilePath
     
     def selectHotelFile(self):
@@ -226,6 +266,9 @@ class Api:
             filetypes=[("Excel Files", "*.xls *.xlsx")]
         )
         print(self.hotelFilePath)
+
+        setDefault("Hotel - Schedule", self.hotelFilePath, jsonFile)
+
         return self.hotelFilePath
 
     def selectDestinationFolder(self):
@@ -233,12 +276,18 @@ class Api:
             title="Select a Folder For New Yearly Directory"
         )
         print(self.destinationFolderPath)
+        
+        setDefault("Destination Folder", self.destinationFolderPath, jsonFile)
+        
         return self.destinationFolderPath
     
     def dateSelection(self, dateInput):
         self.yearValue = int(dateInput)
 
         print(self.yearValue)
+
+        setDefault("Year", self.yearValue, jsonFile)
+
         return self.yearValue
     
     def initializeBuildDirectory(self):
@@ -306,3 +355,4 @@ if __name__ == '__main__':
     
     # Set the api self.window so python can push to it
     webview.start()
+    # webview.start(debug=True)
