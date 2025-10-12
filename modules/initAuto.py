@@ -1,6 +1,6 @@
-from modules.automation.customizeDate import customizeDate
-from modules.automation.dirCreation import dirCreation
-from modules.automation.excelCreator import excelCreator
+from modules.customizeDate import customizeDate
+from modules.dirCreation import dirCreation
+from modules.excelCreator import excelCreator
 
 def automation(DestDir, SourceDir, FileName, Files, year, response, self):
     #Automation
@@ -11,4 +11,4 @@ def automation(DestDir, SourceDir, FileName, Files, year, response, self):
     numbermonths, YearDir = dirCreation(DestDir, year, Files, SourceDir, response, self)
 
     # Makes Custom dates on file copies
-    excelCreator(numbermonths, FileName, YearDir, countdot, SourceDir, Files, PeriodStart, TotalWeeks)
+    excelCreator(numbermonths, FileName, YearDir, countdot, SourceDir, Files, PeriodStart, TotalWeeks, self)

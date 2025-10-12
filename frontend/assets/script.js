@@ -7,11 +7,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     const hotelBtn = document.getElementById("hotelFileInput")    
     const dateInput = document.getElementById("dateInput")
     const customDate = document.getElementById("customDate")
-    const buildProgress = document.getElementById("buildProgress")
+    const progressBar = document.getElementById("progressBar")
     const buildBtn = document.getElementById("build")
     const customDateSetting = document.getElementById("customDateSetting")
+    const progressStatus = document.getElementById("progressStatus")
 
     customDate.checked = true;
+        // customDate.click
 
     // Need to set it up for when pywebviewready
     // adding table element made it unmodular
@@ -32,6 +34,17 @@ document.addEventListener("DOMContentLoaded", async () => {
     })
    
 
+    // calc defatult year
+    function defaultYear(){
+        const currentDate = new Date();
+        let currentYear = currentDate.getFullYear();
+        let nextYear = currentYear + 1;
+        
+        dateInput.value = nextYear
+    }
+
+    defaultYear()
+
 
     buildBtn.addEventListener("click", async() => {
         try {
@@ -42,13 +55,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     })
     
 
-    function updateProgress(value){
-        buildProgress.value = value
-    }
+
 
     customDate.addEventListener("change", async () => {
         try {
-            alert(customDate.checked)
+            // alert(customDate.checked)
 
             customDateChoice = customDate.checked;
             customDateSetting.innerHTML = customDateChoice
@@ -100,13 +111,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     })    
 
-    destinationFolderBtn.addEventListener("click", async () => {
-        try {
-            const destinationStatus = window.pywebview.api.selectDestinationFolder()
-        } catch {
-
-        }
-    })    
 
     hotelBtn.addEventListener("click", async () => {
         try {
@@ -116,5 +120,29 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     })
 
+    destinationFolderBtn.addEventListener("click", async () => {
+        try {
+            const destinationStatus = window.pywebview.api.selectDestinationFolder()
+        } catch {
+
+        }
+    })    
+
 
 })
+function updateProgress(value){
+    progressBar.value = value
+}
+
+function progressStatusUpdate(value){
+    progressStatus.innerHTML = value
+}
+
+function alertTest(){
+    alert("test")
+}
+
+function ring(){
+    alert("ring")
+}
+   

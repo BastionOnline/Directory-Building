@@ -4,12 +4,15 @@ import sys
 import threading
 
 from tkinter import filedialog
-from modules.automation.templateSetup import initTemplate
-from modules.automation import automation
+from modules.templateSetup import initTemplate
+from modules.initAuto import automation
+from modules.statusUpdate import status
+
+# load json file path
+
 
 class Api:
-    # load json file path
-    def __init__(self):
+    def __init__(self, window):
         self.balanceFilePath = None
         self.scheduleFilePath = None
         self.salesFilePath = None
@@ -23,8 +26,7 @@ class Api:
         self.nameExcel = None
         self.nameSolo = None
         self.nameNumberedExcel = None
-        self.window = None
-
+        self.window = window
 
     def selectBalanceFile(self):
         self.balanceFilePath = filedialog.askopenfilename(
@@ -79,7 +81,7 @@ class Api:
         return self.destinationFolderPath
     
     def dateSelection(self, dateInput):
-        self.yearValue = dateInput
+        self.yearValue = int(dateInput)
 
         print(self.yearValue)
         return self.yearValue
@@ -95,9 +97,19 @@ class Api:
             year = self.yearValue
             response = self.customizeDateBool
 
+            
+            print(self.window)
+            self.window = webview.active_window()
+            print(self.window)
+
+            current = webview.active_window()
+            print(current)
+
             automation(DestDir, SourceDir, FileName, Files, year, response, self)
+            # status(100, 100, "Completed", self)
 
         threading.Thread(target=startThreading, daemon=True).start()
+        
         # Use daemon=True for background work like progress updates, file automation, etc., where it’s OK to stop when the app closes.
         # Use daemon=False if the task must complete before the program exits (e.g., saving files, database writes, etc.).
 
@@ -131,14 +143,39 @@ css_file = resource_path(r'.\frontend\assets\style.css')
 js_file = resource_path(r'.\frontend\assets\script.js')
 
 
+# def main():
+
+    # api = Api(None) # Temporarily None, will be updated below
+
+
+    # # Open the HTML file in a webview window
+    # window = webview.create_window("Directory Builder", f"file://{html_file}", js_api=api)
+    # # api.window = webview.create_window("Directory Builder", f"file://{html_file}", js_api=api)
+    
+    # api.window = window
+    # # api = Api(window)
+
+    # # app_instance = Api(window)
+
+    # # Set the api self.window so python can push to it
+    # webview.start()
+    # # webview.start(api)
+    # # api.set_window(window)
+    # # api.set_window()
+    # # webview.start(gui='edgechromium')
+
+
 if __name__ == '__main__':
-    # Example usage of transcribe function
-    api = Api()
+    # main()
+    api = Api(None)
 
     # Open the HTML file in a webview window
     window = webview.create_window("Directory Builder", f"file://{html_file}", js_api=api)
+    # api.window = webview.create_window("Directory Builder", f"file://{html_file}", js_api=api)
     
     # Set the api self.window so python can push to it
-    api.set_window(window)
     webview.start()
+    # api.set_window(window)
+    # api.set_window()
+    # webview.start(gui='edgechromium')
 

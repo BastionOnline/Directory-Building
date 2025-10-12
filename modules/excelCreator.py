@@ -2,9 +2,9 @@ import openpyxl
 from datetime import timedelta
 import os
 import shutil
-from modules.automation.statusUpdate import status
+from modules.statusUpdate import status
 
-def excelCreator(numbermonths, FileName, YearDir, countdot, SourceDir, Files, PeriodStart, TotalWeeks):
+def excelCreator(numbermonths, FileName, YearDir, countdot, SourceDir, Files, PeriodStart, TotalWeeks, self):
     
     # Schedule Adjustment
     def ShedUpdate(FileDir, File, MY):
@@ -32,7 +32,7 @@ def excelCreator(numbermonths, FileName, YearDir, countdot, SourceDir, Files, Pe
         period = 0
 
         while period < TotalWeeks:
-            status(period, TotalWeeks-1, "Schedules created")
+            status(period, TotalWeeks-1, "Schedules created", self)
             #print("period is", period, "Count is", count)
             CurWeek = PeriodStart + timedelta(weeks=period)
             EndWeek = CurWeek + timedelta(days=6)
