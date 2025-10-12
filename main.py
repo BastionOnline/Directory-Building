@@ -4,7 +4,7 @@ import os
 import sys
 import threading
 
-from tkinter import filedialog
+from tkinter import filedialog, messagebox
 from modules.templateSetup import initTemplate
 from modules.initAuto import automation
 from modules.statusUpdate import status
@@ -173,6 +173,7 @@ class Api:
                 # check value sent from json to see if it is present
                 print(userDefaults)
                 requestedValue = defaultCheck(jsonValue, userDefaults)
+                # print(requestedValue["bool"])
                 # return findings
                 return requestedValue
 
@@ -190,6 +191,7 @@ class Api:
 
     def checkUserDefaults(self, jsonValue):
         try:
+            print(jsonValue)
             if os.path.exists(self.jsonPath):
                 # if there is a json file load it
                 userDefaults = loadJson(self)
@@ -207,6 +209,18 @@ class Api:
         except Exception as e:
             print(e)
             return requestedValue
+
+    def selectCustomDateFile():
+        result = messagebox.askyesno(
+            "Confirmation",
+            "Would you like to customize the dates?"
+        )
+        print(f"User selected: {result}")  # True or False
+
+        setDefault("Customize Date", result, jsonFile)
+
+        
+        return result
 
     def selectBalanceFile(self):
         self.balanceFilePath = filedialog.askopenfilename(
