@@ -20,9 +20,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     const destinationStatus = document.getElementById("destinationStatus")
     
     
-    let customDateChoice = false;
+    // let customDateChoice = false;
 
-    customDate.checked = true;
+    // customDate.checked = true;
+    
         // customDate.click
 
     // Need to set it up for when pywebviewready
@@ -62,25 +63,25 @@ document.addEventListener("DOMContentLoaded", async () => {
         try {
             alert("Building...")
 
-            // const customDateCheck = await window.pywebview.api.checkUserDefaults("Customize Date")
-            // alert(customDateCheck.bool)
-            // alert("checked")
-
-            // if (customDateCheck.bool === false) {
-            //     alert("Please set up user defaults before building")
-                
-            //     // selects files AND writes to json
-            //     const updateCustomDate = await window.pywebview.api.selectCustomDateFile()
-            //     customDateStatus.innerHTML = updateCustomDate
-            //     alert("Custom Date updated")
-            // } else {
-            //     alert("Custom Date found")
-            // }
-
+            const customDateCheck = await window.pywebview.api.checkUserDefaults("Customize Date")
+            alert(customDateCheck.bool)
             alert("checked")
+
+            if (customDateCheck.bool === false) {
+                alert("Please set up user defaults before building")
+                
+                // selects files AND writes to json
+                const updateCustomDate = await window.pywebview.api.selectCustomDateFile()
+                customDateStatus.innerHTML = updateCustomDate
+                alert("Custom Date updated")
+            } else {
+                alert("Custom Date found")
+            }
+
+
             const balanceCheck = await window.pywebview.api.checkUserDefaults("Balance")
             alert(balanceCheck.bool)
-            alert("checked")
+
 
             if (balanceCheck.bool === false) {
                 alert("Please set up user defaults before building")
@@ -121,6 +122,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 alert(updateSales)
             }
 
+
             const invoiceCheck = await window.pywebview.api.checkUserDefaults("Invoices")
             alert(invoiceCheck.bool)
 
@@ -133,18 +135,18 @@ document.addEventListener("DOMContentLoaded", async () => {
                 invoiceStatus.innerHTML = updateInvoice
             }
 
+
             const hotelCheck = await window.pywebview.api.checkUserDefaults("Hotel - Schedule")
             alert(hotelCheck.bool)
 
             if (hotelCheck.bool === false) {
                 alert("Please set up user defaults before building")
+
                 const updateHotel = await window.pywebview.api.selectHotelFile()
                 alert(updateHotel)
-                const jsonHotelFilePath = await window.pywebview.api.checkUserDefaults("Hotel - Schedule")
-                alert(jsonHotelFilePath.value)
-                hotelStatus.innerHTML = jsonHotelFilePath.value
-            }
 
+                hotelStatus.innerHTML = updateHotel
+            }
 
 
             const destCheck = await window.pywebview.api.checkUserDefaults("Destination Folder")
@@ -152,21 +154,15 @@ document.addEventListener("DOMContentLoaded", async () => {
 
             if (destCheck.bool === false) {
                 alert("Please set up user defaults before building")
+
                 const updateDest = await window.pywebview.api.selectDestinationFolder()
                 alert(updateDest)
-                const jsonDestFilePath = await window.pywebview.api.checkUserDefaults("Destination Folder")
-                alert(jsonDestFilePath.value)
-                destinationStatus.innerHTML = jsonDestFilePath.value
+
+                destinationStatus.innerHTML = updateDest
             }
 
 
-
-
             const buildStat = window.pywebview.api.initializeBuildDirectory()
-
-
-
-
 
         } catch (error) {
 
@@ -290,10 +286,20 @@ document.addEventListener("DOMContentLoaded", async () => {
             try {
                 const filePropStatus = await window.pywebview.api.loadUserDefaults(fileProp);
                 if (filePropStatus.bool === true) {
-                    setting.innerHTML = filePropStatus.value
+                        if (fileProp === "Customize Date") {
+                            if (filePropStatus.value === "true") {
+                                filePropStatus.value = "✅ Custom Date will be set"
+                                customDate.checked = true;
+                            }}
+                        setting.innerHTML = filePropStatus.value
+
                     return "filePropStatus"
 
                 } else {
+                    if (fileProp === "Customize Date") {
+                        setting.innerHTML = `❌ ${fileProp} will not be set`
+                        return "filePropStatus"
+                    }
                     setting.innerHTML = `❌ ${fileProp} needs to be set`
                     return "filePropStatus"
                 }
