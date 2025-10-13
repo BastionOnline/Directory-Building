@@ -43,7 +43,22 @@ document.addEventListener("DOMContentLoaded", async () => {
             alert("year selection error: ", err);
         }
     })
-   
+
+    dateInput.addEventListener("wheel", async (event) => {
+        event.preventDefault();
+
+        currentvalue = parseInt(dateInput.value);
+        
+        if (event.deltaY < 0) {
+            dateInput.value = currentvalue + 1;
+            await window.pywebview.api.dateSelection(dateInput.value)
+
+        } else {
+            dateInput.value = currentvalue - 1;
+            await window.pywebview.api.dateSelection(dateInput.value)
+        }
+    })
+
 
     buildBtn.addEventListener("click", async() => {
         try {
@@ -166,6 +181,9 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     })
     
+
+
+
     customDate.addEventListener("change", async () => {
         try {
             // alert(customDate.checked)
