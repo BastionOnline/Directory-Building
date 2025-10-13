@@ -8,6 +8,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     const dateInput = document.getElementById("dateInput")
     const customDate = document.getElementById("customDate")
     const progressBar = document.getElementById("progressBar")
+    const propSettings = document.getElementById("propSettings")
+    const configTable = document.getElementById("configTable")
     const buildBtn = document.getElementById("build")
     
     const customDateStatus = document.getElementById("customDateStatus")
@@ -21,6 +23,15 @@ document.addEventListener("DOMContentLoaded", async () => {
     
     customDateTrue = "✅ Custom Date will be set"
     customDateFalse = "❌ Custom Date will not be set"
+
+    propSettings.addEventListener("click", () => {
+        // alert("click")
+        if (configTable.style.display === "none" || configTable.style.display === "") {
+            configTable.style.display = "table"
+        } else {
+            configTable.style.display = ""
+        }
+    }  )
 
     // let customDateChoice = false;
 

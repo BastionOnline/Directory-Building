@@ -1,3 +1,50 @@
+body {
+    font-family: 'Courier New', Courier, monospace;
+    padding:0;
+    margin: 0 auto;
+    text-align: center;
+    align-content: center;
+    width: 100vw;
+    height: 100vh;
+    /* display: flex; */
+}
+
+#dateInput {
+    display: block;
+    margin: 0 auto;
+}
+
+progress {
+    appearance: none;
+}
+
+progress::-webkit-progress-bar {
+  background-color: #e0e0e0;
+  border-radius: 10px;
+}
+
+progress::-webkit-progress-value {
+  background-color: #4caf50;
+  border-radius: 10px;
+}
+
+progress::-moz-progress-bar {
+  background-color: #4caf50;
+  border-radius: 10px;
+}
+
+
+
+#progressStatus {
+    display: block;
+    margin: 0 auto;
+}
+
+table {
+    display: none;
+    text-align: left;
+}
+
 .status-box {
     max-width: 200px;
     border: 1px solid #ccc;
@@ -7,4 +54,8 @@
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
+}
+
+table {
+    margin: 0 auto;
 }
