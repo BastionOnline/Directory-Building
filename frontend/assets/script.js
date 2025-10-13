@@ -72,6 +72,62 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     buildBtn.addEventListener("click", async() => {
         try {
+
+            const fileConfig = [
+            {
+                name: "Balance",
+                selectMethod: "selectBalanceFile",
+                statusElement: balanceStatus
+            },
+            {
+                name: "Schedules",
+                selectMethod: "selectScheduleFile",
+                statusElement: scheduleStatus
+            },
+            {
+                name: "Sales",
+                selectMethod: "selectSalesFile",
+                statusElement: salesStatus
+            },
+            {
+                name: "Invoices",
+                selectMethod: "selectInvoiceFile",
+                statusElement: invoiceStatus
+            },
+            {
+                name: "Hotel - Schedule",
+                selectMethod: "selectHotelFile",
+                statusElement: hotelStatus
+            },
+            {
+                name: "Destination Folder",
+                selectMethod: "selectDestinationFolder",
+                statusElement: destinationStatus
+            }
+            ];
+
+            for (const item of fileConfig) {
+                const checkResult = await window.pywebview.api.checkUserDefaults(item.name);
+
+                if (checkResult.bool === false) {
+                    alert(`Please select a ${item.name} file`);
+
+                    // dynamically call the API method using bracket notation
+                    const updatedValue = await window.pywebview.api[item.selectMethod]();
+
+                    // update DOM
+                    item.statusElement.innerHTML = updatedValue;
+                } else {
+                    console.log(`${item.name} found`);
+                }
+            }
+
+        // After all checks, initialize build directory
+        await window.pywebview.api.initializeBuildDirectory();
+
+
+
+
             // alert("Building...")
 
             // const customDateCheck = await window.pywebview.api.checkUserDefaults("Customize Date")
@@ -87,104 +143,109 @@ document.addEventListener("DOMContentLoaded", async () => {
             // alert("Custom Date updated")
             // } else {
                 // alert("Custom Date found")
-            
 
-
-            const balanceCheck = await window.pywebview.api.checkUserDefaults("Balance")
-            // alert(balanceCheck.bool)
-
-
-            if (balanceCheck.bool === false) {
-                alert("Please select a Balance file")
                 
-                // selects files AND writes to json
-                const updateBalance = await window.pywebview.api.selectBalanceFile()
-                balanceStatus.innerHTML = updateBalance
-                // alert("Balance updated")
-            } else {
-                // alert("Balance found")
-            }
 
 
-            const scheduleCheck = await window.pywebview.api.checkUserDefaults("Schedules")
-            // alert(scheduleCheck.bool)
-
-            if (scheduleCheck.bool === false) {
-                alert("Please select a Schedule file")
-
-                // selects files AND writes to json
-                const updateSchedule = await window.pywebview.api.selectScheduleFile()
-                scheduleStatus.innerHTML = updateSchedule
-                // alert(updateSchedule)
-            } else {
-                // alert("Schedule found")
-            }
 
 
-            const salesCheck = await window.pywebview.api.checkUserDefaults("Sales")
-            // alert(salesCheck.bool)
 
-            if (salesCheck.bool === false) {
-                alert("Please select a Sales file")
+            // UNBLOCK UNDER HERE
+            // const balanceCheck = await window.pywebview.api.checkUserDefaults("Balance")
+            // // alert(balanceCheck.bool)
+
+
+            // if (balanceCheck.bool === false) {
+            //     alert("Please select a Balance file")
+                
+            //     // selects files AND writes to json
+            //     const updateBalance = await window.pywebview.api.selectBalanceFile()
+            //     balanceStatus.innerHTML = updateBalance
+            //     // alert("Balance updated")
+            // } else {
+            //     // alert("Balance found")
+            // }
+
+
+            // const scheduleCheck = await window.pywebview.api.checkUserDefaults("Schedules")
+            // // alert(scheduleCheck.bool)
+
+            // if (scheduleCheck.bool === false) {
+            //     alert("Please select a Schedule file")
+
+            //     // selects files AND writes to json
+            //     const updateSchedule = await window.pywebview.api.selectScheduleFile()
+            //     scheduleStatus.innerHTML = updateSchedule
+            //     // alert(updateSchedule)
+            // } else {
+            //     // alert("Schedule found")
+            // }
+
+
+            // const salesCheck = await window.pywebview.api.checkUserDefaults("Sales")
+            // // alert(salesCheck.bool)
+
+            // if (salesCheck.bool === false) {
+            //     alert("Please select a Sales file")
                                 
-                // selects files AND writes to json
-                const updateSales = await window.pywebview.api.selectSalesFile()
-                salesStatus.innerHTML = updateSales
+            //     // selects files AND writes to json
+            //     const updateSales = await window.pywebview.api.selectSalesFile()
+            //     salesStatus.innerHTML = updateSales
 
-                // alert(updateSales)
-            } else {
-                // alert("Sales found")
-            }
+            //     // alert(updateSales)
+            // } else {
+            //     // alert("Sales found")
+            // }
 
 
-            const invoiceCheck = await window.pywebview.api.checkUserDefaults("Invoices")
-            // alert(invoiceCheck.bool)
+            // const invoiceCheck = await window.pywebview.api.checkUserDefaults("Invoices")
+            // // alert(invoiceCheck.bool)
 
-            if (invoiceCheck.bool === false) {
-                alert("Please select an Invoice file")
+            // if (invoiceCheck.bool === false) {
+            //     alert("Please select an Invoice file")
 
-                // selects files AND writes to json
-                const updateInvoice = await window.pywebview.api.selectInvoiceFile()
-                invoiceStatus.innerHTML = updateInvoice
+            //     // selects files AND writes to json
+            //     const updateInvoice = await window.pywebview.api.selectInvoiceFile()
+            //     invoiceStatus.innerHTML = updateInvoice
                 
-                // alert(updateInvoice)
-            } else {
-                // alert("Invoices found")
-            }
+            //     // alert(updateInvoice)
+            // } else {
+            //     // alert("Invoices found")
+            // }
 
 
-            const hotelCheck = await window.pywebview.api.checkUserDefaults("Hotel - Schedule")
-            // alert(hotelCheck.bool)
+            // const hotelCheck = await window.pywebview.api.checkUserDefaults("Hotel - Schedule")
+            // // alert(hotelCheck.bool)
 
-            if (hotelCheck.bool === false) {
-                alert("Please select a Hotel - Schedule file")
+            // if (hotelCheck.bool === false) {
+            //     alert("Please select a Hotel - Schedule file")
 
-                // selects files AND writes to json
-                const updateHotel = await window.pywebview.api.selectHotelFile()
-                hotelStatus.innerHTML = updateHotel
+            //     // selects files AND writes to json
+            //     const updateHotel = await window.pywebview.api.selectHotelFile()
+            //     hotelStatus.innerHTML = updateHotel
 
-                // alert(updateHotel)
-            } else {
-                // alert("Hotel - Schedule found")
-            }
-
-
-            const destCheck = await window.pywebview.api.checkUserDefaults("Destination Folder")
-            // alert(destCheck.bool)
-
-            if (destCheck.bool === false) {
-                alert("Please select a Destination Folder")
-
-                const updateDest = await window.pywebview.api.selectDestinationFolder()
-                destinationStatus.innerHTML = updateDest
-
-                // alert(updateDest)
-            } else {
-                // alert("Destination Folder found")
-            }
+            //     // alert(updateHotel)
+            // } else {
+            //     // alert("Hotel - Schedule found")
+            // }
 
 
-            const buildStat = window.pywebview.api.initializeBuildDirectory()
+            // const destCheck = await window.pywebview.api.checkUserDefaults("Destination Folder")
+            // // alert(destCheck.bool)
+
+            // if (destCheck.bool === false) {
+            //     alert("Please select a Destination Folder")
+
+            //     const updateDest = await window.pywebview.api.selectDestinationFolder()
+            //     destinationStatus.innerHTML = updateDest
+
+            //     // alert(updateDest)
+            // } else {
+            //     // alert("Destination Folder found")
+            // }
+
+
+            // const buildStat = window.pywebview.api.initializeBuildDirectory()
 
         } catch (error) {
 
