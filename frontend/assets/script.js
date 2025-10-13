@@ -47,9 +47,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     buildBtn.addEventListener("click", async() => {
         try {
-            alert("Building...")
+            // alert("Building...")
 
-            const customDateCheck = await window.pywebview.api.checkUserDefaults("Customize Date")
+            // const customDateCheck = await window.pywebview.api.checkUserDefaults("Customize Date")
             // alert(customDateCheck.bool)
             // alert("checked")
 
@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 
             //     // selects files AND writes to json
             //     const updateCustomDate = await window.pywebview.api.selectCustomDateFile()
-            customDateStatus.innerHTML = updateCustomDate
+            // customDateStatus.innerHTML = updateCustomDate
             // alert("Custom Date updated")
             // } else {
                 // alert("Custom Date found")
@@ -168,7 +168,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     
     customDate.addEventListener("change", async () => {
         try {
-            alert(customDate.checked)
+            // alert(customDate.checked)
 
             customDateChoice = customDate.checked;
             customDateChoiceStr = customDateChoice.toString()
