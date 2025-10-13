@@ -10,8 +10,9 @@ body {
 }
 
 #dateInput {
-    display: block;
+    /* display: block; */
     margin: 0 auto;
+    width: 80px;
 }
 
 progress {
@@ -33,7 +34,10 @@ progress::-moz-progress-bar {
   border-radius: 10px;
 }
 
-
+#progressBar {
+    display: block;
+    margin: 0 auto
+}
 
 #progressStatus {
     display: block;
