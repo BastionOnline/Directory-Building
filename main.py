@@ -229,16 +229,16 @@ class Api:
             print(e)
             return requestedValue
 
-    def selectCustomDateFile():
-        result = messagebox.askyesno("Confirm Action", "Do you want to proceed with this operation?")
+    # def selectCustomDateFile():
+    #     result = messagebox.askyesno("Confirm Action", "Do you want to proceed with this operation?")
 
-        # result = messagebox.askyesno(
-        #     "Confirmation",
-        #     "Would you like to customize the dates?"
-        # )
-        print(f"User selected: {result}")  # True or False
+    #     # result = messagebox.askyesno(
+    #     #     "Confirmation",
+    #     #     "Would you like to customize the dates?"
+    #     # )
+    #     print(f"User selected: {result}")  # True or False
 
-        setDefault("Customize Date", result, jsonFile)
+    #     setDefault("Customize Date", result, jsonFile)
 
         
         return result
@@ -352,6 +352,17 @@ class Api:
         # Use daemon=False if the task must complete before the program exits (e.g., saving files, database writes, etc.).
 
         return
+    
+    def openBuildLocation(self):
+        
+        heist = loadJson(self)
+        folder = heist["Destination Folder"]
+
+        # Handle different OS
+        # if platform.system() == "Windows":
+        os.startfile(folder)
+        return f"Opened: {folder}"
+
         
 # change date input to year
 # setup json

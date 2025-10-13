@@ -44,6 +44,12 @@ progress::-moz-progress-bar {
     margin: 0 auto;
 }
 
+#openBuildLocation {
+    /* display: none; */
+    /* display: block; */
+    margin: 0 auto;
+}
+
 table {
     display: none;
     text-align: left;

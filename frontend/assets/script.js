@@ -1,3 +1,5 @@
+let openBuildLocationBtn = null;
+
 document.addEventListener("DOMContentLoaded", async () => {
     const balanceBtn = document.getElementById("balanceFileInput")
     const scheduleBtn = document.getElementById("scheduleFileInput")
@@ -11,6 +13,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const propSettings = document.getElementById("propSettings")
     const configTable = document.getElementById("configTable")
     const buildBtn = document.getElementById("build")
+    openBuildLocationBtn = document.getElementById("openBuildLocation")
     
     const customDateStatus = document.getElementById("customDateStatus")
     const progressStatus = document.getElementById("progressStatus")
@@ -124,7 +127,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         // After all checks, initialize build directory
         await window.pywebview.api.initializeBuildDirectory();
-
+            
 
 
 
@@ -252,6 +255,10 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     })
     
+
+    openBuildLocationBtn.addEventListener("click", async () => {
+        await window.pywebview.api.openBuildLocation()
+    })
 
 
 
@@ -426,15 +433,25 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 function handleProgress(data){
     progressBar.value = data.progressValue
-    progressStatus.innerHTML = value.progressDescription
+    progressStatus.innerHTML = data.progressDescription
+
+    if (data.progressItem == "Completed"){
+
+        openBuildLocationBtn.style.display = "block"
+        // openBuildLocationBtn.value = data.progressLocation
+    } else {
+        openBuildLocationBtn.style.display = "none"
+    }
 }
 
 function updateProgress(value){
     progressBar.value = value
+    // if (value == 100)
 }
 
 function progressStatusUpdate(value){
     progressStatus.innerHTML = value
+
 }
 
 function alertTest(test){
