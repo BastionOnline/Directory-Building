@@ -6,6 +6,7 @@
 \coding
 \debug menu
 \__pycache__
+\templates
 
 *.code-workspace
 *.xlsx
