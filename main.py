@@ -1,3 +1,4 @@
+from datetime import datetime
 import json
 import webview
 import os
@@ -42,11 +43,13 @@ def createJson():
     if templateFolderStat == False:
         os.mkdir(templateFolderDir)
 
+    currentYear = datetime.now().year
+    
 
     print(os.path.exists(jsonFile))
     if os.path.exists(jsonFile) == False:
         data = {
-            "Year": "",
+            "Year": f"{currentYear + 1}",
             "Customize Date": "true",
             "Balance": "",
             "Schedules": "",
@@ -94,9 +97,12 @@ def loadJson(self):
     return userDefaults
 
 def defaultCheck(jsonValue, userDefaults):
+    print(jsonValue)
+    print(userDefaults)
 
     if jsonValue == "Customize Date":
         path = userDefaults.get(jsonValue)
+        print(path)
         if path == "true":
             return {"location": "defaultCheck, key found, path valid", 
                     "error": "None",
@@ -104,6 +110,29 @@ def defaultCheck(jsonValue, userDefaults):
                     "bool": True}
         else:
             return {"location": "defaultCheck, key found, path not valid",
+                    "error": "create key, value pair",
+                    "value": path,
+                    "bool": False}
+    elif jsonValue == "Year":
+        path = userDefaults.get(jsonValue)
+
+        # print(path, type(path))
+        try:
+            yearint = int(path)
+
+            if type(yearint) == int:
+                return {"location": "defaultCheck, key found, path valid", 
+                        "error": "None",
+                        "value": path,
+                        "bool": True}
+            else:
+                return {"location": "defaultCheck, key found, path not valid",
+                        "error": "create key, value pair",
+                        "value": path,
+                        "bool": False}
+        except Exception as e:
+            print(e)
+            return {"location": "defaultCheck, exception block",
                     "error": "create key, value pair",
                     "value": path,
                     "bool": False}
@@ -211,10 +240,12 @@ class Api:
             return requestedValue
 
     def selectCustomDateFile():
-        result = messagebox.askyesno(
-            "Confirmation",
-            "Would you like to customize the dates?"
-        )
+        result = messagebox.askyesno("Confirm Action", "Do you want to proceed with this operation?")
+
+        # result = messagebox.askyesno(
+        #     "Confirmation",
+        #     "Would you like to customize the dates?"
+        # )
         print(f"User selected: {result}")  # True or False
 
         setDefault("Customize Date", result, jsonFile)
@@ -311,27 +342,9 @@ class Api:
 
             heist = loadJson(self)
 
-            # print(heist)
-            # print(heist["Year"])
-            # print(heist["Customize Date"])
-            # print(heist["Balance"])
-            # print(heist["Schedules"])
-            # print(heist["Sales"])
-            # print(heist["Invoices"])
-            # print(heist["Hotel - Schedule"])
-            # print(heist["Destination Folder"])
-            
-
             DestDir = heist["Destination Folder"]
-            year = heist["Year"]
+            year = int(heist["Year"])
             response = heist["Customize Date"]
-
-
-
-            # DestDir = self.destinationFolderPath
-            # year = self.yearValue
-            # response = self.customizeDateBool
-            
             SourceDir = self.sourceDir
             FileName = self.nameSolo
             Files = self.nameNumberedExcel
@@ -354,6 +367,7 @@ class Api:
         
 # change date input to year
 # setup json
+# json year empty condition
 # make invoice shortcut to each invoice folder
      
 
