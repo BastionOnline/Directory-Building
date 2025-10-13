@@ -1,51 +1,18 @@
-from datetime import date
 import calendar
 import os
-import openpyxl
 import shutil
 import win32com.client
 from modules.statusUpdate import status
-from modules.excelCustomize import xlSales
 from modules.createDirectoryModule import createDir
 
 def dirCreation(DestDir, year, Files, SourceDir, response, self):
-    ###################################################################################################################################
-    #This formats xl
-
-    # def xlSales(inputdir, file, MY, FirstDay):
-
-    #     print(f"starting ${file} config\n\n")
-    #     print(f"inputdirectory:\n ${inputdir}")
-
-    #     inputfile = os.path.join(inputdir, file)
-    #     outputfile = os.path.join(inputdir, file)
-
-    #     print("\nUpdating excel Sales file to " + MY + "...")
-
-    #     workbook = openpyxl.load_workbook(inputfile)
-
-    #     sheet = workbook['Yearly Calendar']
-    #     cell = sheet['B2']
-    #     cell.value = FirstDay
-
-    #     workbook.save(outputfile)
-    #     print("Sales file updated to " + MY + " and saved to\n" + outputfile)
-
-
-
-    ###################################################################################################################################
-    #This creates directories, make this section optional
-
     # Makes Year Dir
     months = calendar.month_name[1:]
     month_number = list(range(1,13))
     numbermonths = [f'{number}. {month}' for number, month in zip(month_number, months)]
     monthabv = [s[:3] for s in months]
 
-
     YearDir = os.path.join(DestDir, ("MTCC " + str(year)))
-    
-
     if os.path.exists(YearDir):
         print("Year folder already exists")
     else:
@@ -78,30 +45,6 @@ def dirCreation(DestDir, year, Files, SourceDir, response, self):
         os.mkdir(HotelDir)
 
         shutil.copyfile(sourceHotelFile,  destinationHotelFile)
-
-
-    # def createDir(parentFolder, childFolder):
-    #     directory = os.path.join(parentFolder, childFolder) 
-    #     if os.path.exists(directory):
-    #         print(f"{childFolder} folder already exists")
-    #         return directory
-    #     else:
-    #         os.mkdir(directory)
-
-    #         if (childFolder == "3. Sales"):
-    #             salesPathSource = os.path.join(SourceDir, Files[2])
-    #             salesPathDestination = os.path.join(directory, calendar.month_name[i+1] + " Monthly Sales.xlsx")
-
-    #             shutil.copyfile(salesPathSource, salesPathDestination)
-
-    #             # # Info for Sales update
-    #             currentMY = monthabv[i] + " " + str(year)
-    #             currentMon = date(year, int(i+1), 1)
-
-    #             if response == "true":
-    #                 xlSales(directory, calendar.month_name[i+1] + " Monthly Sales.xlsx", currentMY, currentMon)
-
-    #         return directory
 
 
     # Makes Month Dirs
@@ -150,17 +93,6 @@ def dirCreation(DestDir, year, Files, SourceDir, response, self):
 
             createShortcut(target, shortcut)
     
-
         i += 1
-        
-    # i = 0
-    # while i < 12:
-    #     status(i, 11, "Customizing Sales", self)
-    #     # Info for Sales update
-    #     currentMY = monthabv[i] + " " + str(year)
-    #     currentMon = date(year, int(i+1), 1)
-
-    #     if response == "true":
-    #         xlSales(SalesDir, calendar.month_name[i+1] + " Monthly Sales.xlsx", currentMY, currentMon)
 
     return numbermonths, YearDir

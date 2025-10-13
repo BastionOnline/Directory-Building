@@ -4,7 +4,6 @@ import shutil
 from datetime import date
 from modules.excelCustomize import xlSales
 
-
 def createDir(parentFolder, childFolder, SourceDir, Files, i, monthabv, year, response):
         directory = os.path.join(parentFolder, childFolder) 
         if os.path.exists(directory):

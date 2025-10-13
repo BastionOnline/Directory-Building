@@ -1,9 +1,7 @@
 import os
 import openpyxl
 
-###################################################################################################################################
-#This formats xl
-
+#This formats excel sales
 def xlSales(inputdir, file, MY, FirstDay):
 
     print(f"starting ${file} config\n\n")
