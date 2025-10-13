@@ -309,23 +309,40 @@ class Api:
             
             self.sourceDir, self.files, self.nameExcel, self.nameSolo, self.nameNumberedExcel = initTemplate(self, templateFolderDir)
 
-            DestDir = self.destinationFolderPath
+            heist = loadJson(self)
+
+            # print(heist)
+            # print(heist["Year"])
+            # print(heist["Customize Date"])
+            # print(heist["Balance"])
+            # print(heist["Schedules"])
+            # print(heist["Sales"])
+            # print(heist["Invoices"])
+            # print(heist["Hotel - Schedule"])
+            # print(heist["Destination Folder"])
+            
+
+            DestDir = heist["Destination Folder"]
+            year = heist["Year"]
+            response = heist["Customize Date"]
+
+
+
+            # DestDir = self.destinationFolderPath
+            # year = self.yearValue
+            # response = self.customizeDateBool
+            
             SourceDir = self.sourceDir
             FileName = self.nameSolo
             Files = self.nameNumberedExcel
-            year = self.yearValue
-            response = self.customizeDateBool
 
             
             print(self.window)
             self.window = webview.active_window()
             print(self.window)
 
-            # current = webview.active_window()
-            # print(current)
-
-            automation(DestDir, SourceDir, FileName, Files, year, response, self)
             
+            automation(DestDir, SourceDir, FileName, Files, year, response, self)
             status(year, 100, "Completed", self)
 
         threading.Thread(target=startThreading, daemon=True).start()

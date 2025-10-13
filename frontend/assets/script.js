@@ -64,8 +64,8 @@ document.addEventListener("DOMContentLoaded", async () => {
             alert("Building...")
 
             const customDateCheck = await window.pywebview.api.checkUserDefaults("Customize Date")
-            alert(customDateCheck.bool)
-            alert("checked")
+            // alert(customDateCheck.bool)
+            // alert("checked")
 
             if (customDateCheck.bool === false) {
                 alert("Please set up user defaults before building")
@@ -75,12 +75,12 @@ document.addEventListener("DOMContentLoaded", async () => {
                 customDateStatus.innerHTML = updateCustomDate
                 alert("Custom Date updated")
             } else {
-                alert("Custom Date found")
+                // alert("Custom Date found")
             }
 
 
             const balanceCheck = await window.pywebview.api.checkUserDefaults("Balance")
-            alert(balanceCheck.bool)
+            // alert(balanceCheck.bool)
 
 
             if (balanceCheck.bool === false) {
@@ -91,12 +91,12 @@ document.addEventListener("DOMContentLoaded", async () => {
                 balanceStatus.innerHTML = updateBalance
                 alert("Balance updated")
             } else {
-                alert("Balance found")
+                // alert("Balance found")
             }
 
 
             const scheduleCheck = await window.pywebview.api.checkUserDefaults("Schedules")
-            alert(scheduleCheck.bool)
+            // alert(scheduleCheck.bool)
 
             if (scheduleCheck.bool === false) {
                 alert("Please set up user defaults before building")
@@ -105,12 +105,13 @@ document.addEventListener("DOMContentLoaded", async () => {
                 const updateSchedule = await window.pywebview.api.selectScheduleFile()
                 scheduleStatus.innerHTML = updateSchedule
                 alert("Schedule updated")
-
+            } else {
+                // alert("Schedule found")
             }
 
 
             const salesCheck = await window.pywebview.api.checkUserDefaults("Sales")
-            alert(salesCheck.bool)
+            // alert(salesCheck.bool)
 
             if (salesCheck.bool === false) {
                 alert("Please set up user defaults before building")
@@ -120,11 +121,13 @@ document.addEventListener("DOMContentLoaded", async () => {
                 salesStatus.innerHTML = updateSales
 
                 alert(updateSales)
+            } else {
+                // alert("Sales found")
             }
 
 
             const invoiceCheck = await window.pywebview.api.checkUserDefaults("Invoices")
-            alert(invoiceCheck.bool)
+            // alert(invoiceCheck.bool)
 
             if (invoiceCheck.bool === false) {
                 alert("Please set up user defaults before building")
@@ -133,11 +136,13 @@ document.addEventListener("DOMContentLoaded", async () => {
                 alert(updateInvoice)
 
                 invoiceStatus.innerHTML = updateInvoice
+            } else {
+                // alert("Invoices found")
             }
 
 
             const hotelCheck = await window.pywebview.api.checkUserDefaults("Hotel - Schedule")
-            alert(hotelCheck.bool)
+            // alert(hotelCheck.bool)
 
             if (hotelCheck.bool === false) {
                 alert("Please set up user defaults before building")
@@ -146,11 +151,13 @@ document.addEventListener("DOMContentLoaded", async () => {
                 alert(updateHotel)
 
                 hotelStatus.innerHTML = updateHotel
+            } else {
+                // alert("Hotel - Schedule found")
             }
 
 
             const destCheck = await window.pywebview.api.checkUserDefaults("Destination Folder")
-            alert(destCheck.bool)
+            // alert(destCheck.bool)
 
             if (destCheck.bool === false) {
                 alert("Please set up user defaults before building")
@@ -159,6 +166,8 @@ document.addEventListener("DOMContentLoaded", async () => {
                 alert(updateDest)
 
                 destinationStatus.innerHTML = updateDest
+            } else {
+                // alert("Destination Folder found")
             }
 
 
