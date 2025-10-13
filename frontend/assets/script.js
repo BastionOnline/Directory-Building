@@ -1,4 +1,5 @@
 let openBuildLocationBtn = null;
+let progressPercentStatus = null;
 
 document.addEventListener("DOMContentLoaded", async () => {
     const balanceBtn = document.getElementById("balanceFileInput")
@@ -14,7 +15,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     const configTable = document.getElementById("configTable")
     const buildBtn = document.getElementById("build")
     openBuildLocationBtn = document.getElementById("openBuildLocation")
-    
+    progressPercentStatus = document.getElementById("progressPercentStatus")
+
     const customDateStatus = document.getElementById("customDateStatus")
     const progressStatus = document.getElementById("progressStatus")
     const balanceStatus = document.getElementById("balanceStatus")
@@ -434,10 +436,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 function handleProgress(data){
     progressBar.value = data.progressValue
     progressStatus.innerHTML = data.progressDescription
+    progressPercentStatus.innerHTML = data.progressPercentStatus
 
     if (data.progressItem == "Completed"){
 
-        openBuildLocationBtn.style.display = "block"
+        openBuildLocationBtn.style.display = "inline"
         // openBuildLocationBtn.value = data.progressLocation
     } else {
         openBuildLocationBtn.style.display = "none"

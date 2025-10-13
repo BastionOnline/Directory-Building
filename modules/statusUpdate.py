@@ -14,9 +14,10 @@ def status(current, total, item, self):
     if item == "Completed":
         data = {
             "progressValue": 100,
-            "progressDescription": f"✅ {current} Directory Built",
+            "progressDescription": f"{current} Directory Built",
             "progressItem": item,
-            "progressLocation": self.destinationFolderPath
+            "progressLocation": self.destinationFolderPath,
+            "progressPercentStatus": "✅",
             
         }
 
@@ -32,8 +33,9 @@ def status(current, total, item, self):
     # SEND AS JSON
     data = {
         "progressValue": progress,
-        "progressDescription": f"⏳ {progress}% of {item}",
+        "progressDescription": f"{progress}% of {item}",
         "progressItem": item,
+        "progressPercentStatus": "⏳",
     }
     
     json_data = json.dumps(data)

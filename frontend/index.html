@@ -7,20 +7,29 @@
     <title>Directory Builder</title>
 </head>
 <body>
-    <h1>Build Yearly Directory</h1>
+    <h1>Build Directory for <input type="number" id="dateInput" name="dateInput" min="2000"> </h1>
 
-    <!-- <input type="date" id="dateInput" name="dateInput"> -->
-    <input type="number" id="dateInput" name="dateInput" min="2000">
-
-    <button id="build">Start</button>
+    <div>
+        <progress id="progressBar" value="0" max="100"></progress>
+        <h3 id="progressPercentStatus"></h3>
+        <button id="openBuildLocation">Open</button>
+    </div>
     
-    <progress id="progressBar" value="0" max="100"></progress>
-    <h3 id="progressStatus">waiting...</h3>
 
-<!-- MAKE OPEN BUTTON -->
-    <button id="openBuildLocation">open</button>
+    <h3 id="progressStatus"></h3>
 
-    <button id="propSettings">Settings</button>
+    <div>
+        <button id="build">Start</button>
+        <button id="propSettings" class="propSettings">Settings</button>
+    </div>
+    
+
+    
+    <!-- <h3 id="progressStatus">waiting...</h3> -->
+
+    
+
+    
 
 
     <table id="configTable">

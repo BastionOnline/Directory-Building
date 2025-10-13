@@ -9,10 +9,22 @@ body {
     /* display: flex; */
 }
 
+h1 {
+    font-size: 30px;
+}
+
+div{
+    padding-bottom: 20px;
+    /* margin:100px; */
+}
 #dateInput {
     /* display: block; */
+    /* padding: px; */
+    height: 20px;
+    /* width: 40px; */
     margin: 0 auto;
     width: 80px;
+    border-radius: 3px;
 }
 
 progress {
@@ -35,19 +47,37 @@ progress::-moz-progress-bar {
 }
 
 #progressBar {
-    display: block;
+    display: inline-block;
     margin: 0 auto
 }
 
-#progressStatus {
-    display: block;
+#progressPercentStatus {
+    display: inline;
     margin: 0 auto;
 }
 
+
 #openBuildLocation {
-    /* display: none; */
+    display: none;
     /* display: block; */
+    /* display: inline; */
     margin: 0 auto;
+}
+
+
+
+#progressStatus {
+    display: inline;
+    margin: 0 auto;
+}
+
+
+
+.propSettings {
+    display: inline;
+    margin: 30px auto;
+
+    
 }
 
 table {
