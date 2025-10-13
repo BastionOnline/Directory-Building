@@ -3,6 +3,7 @@ import calendar
 import os
 import openpyxl
 import shutil
+import win32com.client
 from modules.statusUpdate import status
 
 def dirCreation(DestDir, year, Files, SourceDir, response, self):
@@ -126,10 +127,34 @@ def dirCreation(DestDir, year, Files, SourceDir, response, self):
                 print("Invoice Submitted folder already exists")
             else:
                 os.mkdir(InSubDir)
+
+                yearlyInvoicePath = os.path.join(YearDir, "4. Invoices.xlsx")
+
+                shell = win32com.client.Dispatch("WScript.Shell")
+                shortcut = shell.CreateShortcut(yearlyInvoicePath)
+                shortcut.TargetPath(InvoiceDir)
+                shortcut.WorkingDirectory(yearlyInvoicePath)
+                shortcut.save()
+
         else:
             os.mkdir(InvoiceDir)
             os.mkdir(InSubDir)
             
+
+            yearlyInvoicePath = os.path.join(YearDir, "4. Invoices.xlsx")
+            monthlyInvoiceShortcutLink = os.path.join(InvoiceDir, "Invoices.lnk")
+            def createShortcut(target, shortcut):
+                shell = win32com.client.Dispatch("WScript.Shell")
+                shortcut = shell.CreateShortcut(shortcut)
+                shortcut.TargetPath = target
+                shortcut.Description = ""
+                shortcut.WorkingDirectory = os.path.dirname(target)
+                shortcut.save()
+
+            target = yearlyInvoicePath
+            shortcut = monthlyInvoiceShortcutLink
+            createShortcut(target, shortcut)
+    
 
         i += 1
         
