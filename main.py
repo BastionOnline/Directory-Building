@@ -11,7 +11,6 @@ from modules.initAuto import automation
 from modules.statusUpdate import status
 
 # load json file path
-
 templateFolderDir = os.path.join(os.getcwd(), "templates")
 
 jsonPath = "./userDefaults.json"
@@ -63,7 +62,6 @@ def createJson():
             json.dump(data, f, indent=4)  
     return
 
-createJson()
 
 def updateJsonExcel():
     presentExcelFiles = [
@@ -85,9 +83,6 @@ def updateJsonExcel():
 
 updateJsonExcel()
 
-# def userUpdateJson(key, value):
-#     setDefault(key, value, jsonFile)
-#     return
 
 def loadJson(self):
     with open(self.jsonPath, "r") as f:
@@ -141,11 +136,6 @@ def defaultCheck(jsonValue, userDefaults):
     if jsonValue in userDefaults or userDefaults[jsonValue]:
         # best way to get a json value
         path = userDefaults.get(jsonValue)
-
-        # print( "\n" + jsonValue + "\n")
-        # print("\n" + path + "\n")
-        # print(jsonValue)
-        # print(userDefaults)
 
         # tests to see if path returns None and a number
         if not path or not isinstance(path, str): # if path returns None, it is True, because None is falsy
@@ -338,6 +328,10 @@ class Api:
     def initializeBuildDirectory(self):
         def startThreading():
             
+            print(self.window)
+            self.window = webview.active_window()
+            print(self.window)
+
             self.sourceDir, self.files, self.nameExcel, self.nameSolo, self.nameNumberedExcel = initTemplate(self, templateFolderDir)
 
             heist = loadJson(self)
@@ -348,12 +342,6 @@ class Api:
             SourceDir = self.sourceDir
             FileName = self.nameSolo
             Files = self.nameNumberedExcel
-
-            
-            print(self.window)
-            self.window = webview.active_window()
-            print(self.window)
-
             
             automation(DestDir, SourceDir, FileName, Files, year, response, self)
             status(year, 100, "Completed", self)

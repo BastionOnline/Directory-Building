@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/style.css" type="text/css">
+    <title>Directory Builder</title>
+</head>
+<body>
+    <h1>Build Yearly Directory</h1>
+
+    <!-- <input type="date" id="dateInput" name="dateInput"> -->
+    <input type="number" id="dateInput" name="dateInput" min="2000">
+
+    <button id="build">Start</button>
+    
+    <progress id="progressBar" value="0" max="100"></progress>
+    <h3 id="progressStatus"></h3>
+
+    <button id="propSettings">Settings</button>
+
+    <table id="configTable">
+        <thead>
+            <tr>
+                <th>Property</th>
+                <th>Status</th>
+                <th>Update</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    Customize Date
+                </td>    
+                <td id="customDateStatus" class="status-box">
+                    
+                </td>    
+                <td>
+                    <input type="checkbox" id="customDate" name="customDate">            
+                </td>    
+            </tr>
+
+            <tr>
+                <td>
+                    Balance                    
+                </td>    
+                <td id="balanceStatus" class="status-box">
+                    📂📁✅⏳📅🗓️📆🕓🗒️🗑️❌🚀🧩
+                </td>    
+                <td>
+                    <button id="balanceFileInput">Update Balance</button>                    
+                </td>    
+            </tr>
+
+
+            <tr>
+                <td>
+                    Schedule
+                </td>    
+                <td id="scheduleStatus" class="status-box">
+                    
+                </td>    
+                <td>
+                    <button id="scheduleFileInput">Update Schedule</button>
+                </td>    
+            </tr>
+
+
+            <tr>
+                <td>
+                    Sales
+                </td>    
+                <td id="salesStatus" class="status-box">
+                    
+                </td>    
+                <td>
+                    <button id="saleFileInput">Update Sales</button>
+                </td>    
+            </tr>
+
+
+            <tr>
+                <td>
+                    Invoice
+                </td>    
+                <td id="invoiceStatus" class="status-box">
+                    
+                </td>    
+                <td>
+                    <button id="invoiceFileInput">Update Invoice</button>
+                </td>    
+            </tr>
+
+
+            <tr>
+                <td>
+                    Hotel
+                </td>    
+                <td id="hotelStatus" class="status-box">
+                    
+                </td>    
+                <td>
+                    <button id="hotelFileInput">Update Hotel</button>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    Destination Folder
+                </td>    
+                <td id="destinationStatus" class="status-box">
+                    
+                </td>    
+                <td>
+                    <button id="destinationFolderInput">Update location</button>
+                </td>
+            </tr>
+        
+        </tbody>
+    </table>
+    
+    
+    <script src="./assets/script.js" defer></script>
+</body>
+</html>
