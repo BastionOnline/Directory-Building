@@ -17,7 +17,7 @@ def status(current, total, item, self):
             "progressDescription": f"{current} Directory Built",
             "progressItem": item,
             "progressLocation": self.destinationFolderPath,
-            "progressPercentStatus": "✅",
+            "progressEmojiJson": "✅",
             
         }
 
@@ -35,7 +35,7 @@ def status(current, total, item, self):
         "progressValue": progress,
         "progressDescription": f"{progress}% of {item}",
         "progressItem": item,
-        "progressPercentStatus": "⏳",
+        "progressEmojiJson": "⏳",
     }
     
     json_data = json.dumps(data)

@@ -1,5 +1,5 @@
 let openBuildLocationBtn = null;
-let progressPercentStatus = null;
+let progressEmojiElement = null;
 
 document.addEventListener("DOMContentLoaded", async () => {
     const balanceBtn = document.getElementById("balanceFileInput")
@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const configTable = document.getElementById("configTable")
     const buildBtn = document.getElementById("build")
     openBuildLocationBtn = document.getElementById("openBuildLocation")
-    progressPercentStatus = document.getElementById("progressPercentStatus")
+    progressEmojiElement = document.getElementById("progressEmojiElement")
 
     const customDateStatus = document.getElementById("customDateStatus")
     const progressStatus = document.getElementById("progressStatus")
@@ -69,6 +69,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     //     }
     // })
 
+    
+    
 
     buildBtn.addEventListener("click", async() => {
         try {
@@ -274,15 +276,50 @@ document.addEventListener("DOMContentLoaded", async () => {
 // Functions callable from Python
 // These functions are called from Python using window.evaluate_js('functionName(args)')    
 
+function animateProgressBar(target) {
+        const bar = document.getElementById('progressBar');
+        const current = parseFloat(bar.value);
+        const step = (target - current) / 500; // controls speed
+        let progress = current;
+
+        const timer = setInterval(() => {
+            progress += step;
+            if ((step > 0 && progres > target) || (step < 0 && progress <= target )) {
+                progres = target;
+                clearInterval(timer);
+            }
+            bar.value = progress;
+        }, 100);
+
+    }
+
+
+
 function handleProgress(data){
     progressBar.value = data.progressValue
     progressStatus.innerHTML = data.progressDescription
-    progressPercentStatus.innerHTML = data.progressPercentStatus
+    // progressEmojiElement.innerHTML = data.progressEmojiJson
+    // animateProgressBar(data.progressValue)
+
+    // alert(data.progressEmojiJson)
+
+
+    // spin logic
+    if (data.progressEmojiJson == "⏳" ){
+        if (progressEmojiElement.innerHTML == "⏳"){
+        } else {
+            progressEmojiElement.innerHTML = data.progressEmojiJson
+            progressEmojiElement.classList.add('spin');
+        }
+            
+    } else if (data.progressEmojiJson == "✅"){
+        progressEmojiElement.innerHTML = data.progressEmojiJson
+        progressStatus.classList.remove('spin');
+    }
+
 
     if (data.progressItem == "Completed"){
-
         openBuildLocationBtn.style.display = "inline"
-        // openBuildLocationBtn.value = data.progressLocation
     } else {
         openBuildLocationBtn.style.display = "none"
     }
