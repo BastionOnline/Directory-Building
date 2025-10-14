@@ -1,5 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+
 body {
-    font-family: 'Courier New', Courier, monospace;
+    font-family: 'Inter';
+    /* font-family: monospace; */
     padding:0;
     margin: 0 auto;
     text-align: center;
@@ -7,9 +11,20 @@ body {
     width: 100vw;
     height: 100vh;
     /* display: flex; */
+    background-color: black;
+    color: white;
 }
 
+/* title {
+    display: flex;
+    align-items: center;
+} */
+
 h1 {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
     font-size: 30px;
 }
 
@@ -17,14 +32,17 @@ div{
     padding-bottom: 20px;
     /* margin:100px; */
 }
+
 #dateInput {
-    /* display: block; */
-    /* padding: px; */
     height: 20px;
-    /* width: 40px; */
-    margin: 0 auto;
     width: 80px;
     border-radius: 3px;
+    margin: 10px;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  cursor: pointer;
 }
 
 progress {
@@ -48,7 +66,7 @@ progress::-moz-progress-bar {
 
 #progressBar {
     display: inline-block;
-    margin: 0 auto
+    margin: 0 auto;
 }
 
 #progressPercentStatus {
@@ -56,6 +74,9 @@ progress::-moz-progress-bar {
     margin: 0 auto;
 }
 
+button:hover {
+    cursor: pointer;
+}
 
 #openBuildLocation {
     display: none;
@@ -83,6 +104,15 @@ progress::-moz-progress-bar {
 table {
     display: none;
     text-align: left;
+    margin: 0 auto;
+}
+
+th {
+    text-align: center
+}
+
+.tableBtn {
+    width: 150px;
 }
 
 .status-box {
@@ -94,8 +124,4 @@ table {
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
-}
-
-table {
-    margin: 0 auto;
 }
