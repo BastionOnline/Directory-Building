@@ -12,33 +12,35 @@ def status(current, total, item, self):
     print(self.window)
 
     if item == "Completed":
-        # data = {
-        #     "progressValue": 100,
-        #     "progressDescription": f"✅ {current} Directory Built"
-        # }
+        data = {
+            "progressValue": 100,
+            "progressDescription": f"{current} Directory Built",
+            "progressItem": item,
+            "progressLocation": self.destinationFolderPath,
+            "progressEmojiJson": "✅",
+            
+        }
 
-        # json_data = json.dumps(data)
+        json_data = json.dumps(data)
 
-        # self.window.evaluate_js(f"handleProgress({json_data})")
+        self.window.evaluate_js(f"handleProgress({json_data})")
 
-        self.window.evaluate_js(f"updateProgress(100)")
-        self.window.evaluate_js(f"progressStatusUpdate('✅ {current} Directory Built')")
         return
 
     progress = round((int(current)/total)*100)
     print(f"⏳ {progress}% of {item}")
 
     # SEND AS JSON
-    # data = {
-    #     "progressValue": progress,
-    #     "progressDescription": f"⏳ {progress}% of {item}"
-    # }
+    data = {
+        "progressValue": progress,
+        "progressDescription": f"{progress}% of {item}",
+        "progressItem": item,
+        "progressEmojiJson": "⏳",
+    }
     
-    # json_data = json.dumps(data)
+    json_data = json.dumps(data)
 
-    # self.window.evaluate_js(f"handleProgress({json_data})")
+    print(json_data)
 
-    self.window.evaluate_js(f"updateProgress({progress})")
-    self.window.evaluate_js(f"progressStatusUpdate('{progress}% of {item}')")
-
+    self.window.evaluate_js(f"handleProgress({json_data})")
     # can pass values from Python to JS using string interpolation or JSON.

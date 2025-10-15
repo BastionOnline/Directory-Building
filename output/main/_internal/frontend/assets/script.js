@@ -1,3 +1,6 @@
+let openBuildLocationBtn = null;
+let progressEmojiElement = null;
+
 document.addEventListener("DOMContentLoaded", async () => {
     const balanceBtn = document.getElementById("balanceFileInput")
     const scheduleBtn = document.getElementById("scheduleFileInput")
@@ -11,7 +14,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     const propSettings = document.getElementById("propSettings")
     const configTable = document.getElementById("configTable")
     const buildBtn = document.getElementById("build")
-    
+    openBuildLocationBtn = document.getElementById("openBuildLocation")
+    progressEmojiElement = document.getElementById("progressEmojiElement")
+
     const customDateStatus = document.getElementById("customDateStatus")
     const progressStatus = document.getElementById("progressStatus")
     const balanceStatus = document.getElementById("balanceStatus")
@@ -33,13 +38,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     }  )
 
-    // establish dateValue as a global variable and call it later
-
-
     // Need to set it up for when pywebviewready
     // adding table element made it unmodular
-
-    // let dateValue = null
 
     dateInput.addEventListener("change", async () => {
         try{
@@ -69,122 +69,63 @@ document.addEventListener("DOMContentLoaded", async () => {
     //     }
     // })
 
+    
+    
 
     buildBtn.addEventListener("click", async() => {
         try {
-            // alert("Building...")
 
-            // const customDateCheck = await window.pywebview.api.checkUserDefaults("Customize Date")
-            // alert(customDateCheck.bool)
-            // alert("checked")
+            const fileConfig = [
+            {
+                name: "Balance",
+                selectMethod: "selectBalanceFile",
+                statusElement: balanceStatus
+            },
+            {
+                name: "Schedules",
+                selectMethod: "selectScheduleFile",
+                statusElement: scheduleStatus
+            },
+            {
+                name: "Sales",
+                selectMethod: "selectSalesFile",
+                statusElement: salesStatus
+            },
+            {
+                name: "Invoices",
+                selectMethod: "selectInvoiceFile",
+                statusElement: invoiceStatus
+            },
+            {
+                name: "Hotel - Schedule",
+                selectMethod: "selectHotelFile",
+                statusElement: hotelStatus
+            },
+            {
+                name: "Destination Folder",
+                selectMethod: "selectDestinationFolder",
+                statusElement: destinationStatus
+            }
+            ];
 
-            // if (customDateCheck.bool === false) {
-            //     alert("Would you like to set a custom date?")
-                
-            //     // selects files AND writes to json
-            //     const updateCustomDate = await window.pywebview.api.selectCustomDateFile()
-            // customDateStatus.innerHTML = updateCustomDate
-            // alert("Custom Date updated")
-            // } else {
-                // alert("Custom Date found")
-            
+            for (const item of fileConfig) {
+                const checkResult = await window.pywebview.api.checkUserDefaults(item.name);
 
+                if (checkResult.bool === false) {
+                    alert(`Please select a ${item.name} file`);
 
-            const balanceCheck = await window.pywebview.api.checkUserDefaults("Balance")
-            // alert(balanceCheck.bool)
+                    // dynamically call the API method using bracket notation
+                    const updatedValue = await window.pywebview.api[item.selectMethod]();
 
-
-            if (balanceCheck.bool === false) {
-                alert("Please select a Balance file")
-                
-                // selects files AND writes to json
-                const updateBalance = await window.pywebview.api.selectBalanceFile()
-                balanceStatus.innerHTML = updateBalance
-                // alert("Balance updated")
-            } else {
-                // alert("Balance found")
+                    // update DOM
+                    item.statusElement.innerHTML = updatedValue;
+                } else {
+                    console.log(`${item.name} found`);
+                }
             }
 
-
-            const scheduleCheck = await window.pywebview.api.checkUserDefaults("Schedules")
-            // alert(scheduleCheck.bool)
-
-            if (scheduleCheck.bool === false) {
-                alert("Please select a Schedule file")
-
-                // selects files AND writes to json
-                const updateSchedule = await window.pywebview.api.selectScheduleFile()
-                scheduleStatus.innerHTML = updateSchedule
-                // alert(updateSchedule)
-            } else {
-                // alert("Schedule found")
-            }
-
-
-            const salesCheck = await window.pywebview.api.checkUserDefaults("Sales")
-            // alert(salesCheck.bool)
-
-            if (salesCheck.bool === false) {
-                alert("Please select a Sales file")
-                                
-                // selects files AND writes to json
-                const updateSales = await window.pywebview.api.selectSalesFile()
-                salesStatus.innerHTML = updateSales
-
-                // alert(updateSales)
-            } else {
-                // alert("Sales found")
-            }
-
-
-            const invoiceCheck = await window.pywebview.api.checkUserDefaults("Invoices")
-            // alert(invoiceCheck.bool)
-
-            if (invoiceCheck.bool === false) {
-                alert("Please select an Invoice file")
-
-                // selects files AND writes to json
-                const updateInvoice = await window.pywebview.api.selectInvoiceFile()
-                invoiceStatus.innerHTML = updateInvoice
-                
-                // alert(updateInvoice)
-            } else {
-                // alert("Invoices found")
-            }
-
-
-            const hotelCheck = await window.pywebview.api.checkUserDefaults("Hotel - Schedule")
-            // alert(hotelCheck.bool)
-
-            if (hotelCheck.bool === false) {
-                alert("Please select a Hotel - Schedule file")
-
-                // selects files AND writes to json
-                const updateHotel = await window.pywebview.api.selectHotelFile()
-                hotelStatus.innerHTML = updateHotel
-
-                // alert(updateHotel)
-            } else {
-                // alert("Hotel - Schedule found")
-            }
-
-
-            const destCheck = await window.pywebview.api.checkUserDefaults("Destination Folder")
-            // alert(destCheck.bool)
-
-            if (destCheck.bool === false) {
-                alert("Please select a Destination Folder")
-
-                const updateDest = await window.pywebview.api.selectDestinationFolder()
-                destinationStatus.innerHTML = updateDest
-
-                // alert(updateDest)
-            } else {
-                // alert("Destination Folder found")
-            }
-
-
-            const buildStat = window.pywebview.api.initializeBuildDirectory()
+        // After all checks, initialize build directory
+        await window.pywebview.api.initializeBuildDirectory();
 
         } catch (error) {
 
@@ -192,7 +133,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     })
     
 
-
+    openBuildLocationBtn.addEventListener("click", async () => {
+        await window.pywebview.api.openBuildLocation()
+    })
 
     customDate.addEventListener("change", async () => {
         try {
@@ -203,15 +146,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 
             const customDateSetting = await window.pywebview.api.customizeDate(customDateChoiceStr)
 
-            // alert(customDateSetting.value)
             if (customDateSetting === "true") {
                 customDateStatus.innerHTML = customDateTrue
             } else {
                 customDateStatus.innerHTML = customDateFalse
             }
-            // customDateStatus.innerHTML = customDateSetting.value
-
-
         } catch (err) {
 
         }
@@ -285,32 +224,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     })    
 
 
-
-    // async function check(fileProp, setting) {
-    //     return new Promise((resolve, reject) => {
-    //         window.addEventListener('pywebviewready', async () => {
-    //             try {
-    //                 const filePropStatus = await window.pywebview.api.loadUserDefaults(fileProp);
-    //                 if (filePropStatus.bool === true) {
-    //                     setting.innerHTML = filePropStatus.value;
-    //                     resolve(filePropStatus.value);
-    //                 } else {
-    //                     setting.innerHTML = `❌ ${fileProp} needs to be set`;
-    //                     resolve(null);
-    //                 }
-    //             } catch (err) {
-    //                 alert(`Error loading default: ${err}`);
-    //                 reject(err);
-    //             }
-    //         });
-    //     });
-    // }
-
-
-
-
-
-
     async function check(fileProp, setting) {
         window.addEventListener('pywebviewready', async () => {
             try {
@@ -363,17 +276,63 @@ document.addEventListener("DOMContentLoaded", async () => {
 // Functions callable from Python
 // These functions are called from Python using window.evaluate_js('functionName(args)')    
 
+function animateProgressBar(target) {
+        const bar = document.getElementById('progressBar');
+        const current = parseFloat(bar.value);
+        const step = (target - current) / 500; // controls speed
+        let progress = current;
+
+        const timer = setInterval(() => {
+            progress += step;
+            if ((step > 0 && progres > target) || (step < 0 && progress <= target )) {
+                progres = target;
+                clearInterval(timer);
+            }
+            bar.value = progress;
+        }, 100);
+
+    }
+
+
+
 function handleProgress(data){
     progressBar.value = data.progressValue
-    progressStatus.innerHTML = value.progressDescription
+    progressStatus.innerHTML = data.progressDescription
+    // progressEmojiElement.innerHTML = data.progressEmojiJson
+    // animateProgressBar(data.progressValue)
+
+    // alert(data.progressEmojiJson)
+
+
+    // spin logic
+    if (data.progressEmojiJson == "⏳" ){
+        if (progressEmojiElement.innerHTML == "⏳"){
+        } else {
+            progressEmojiElement.innerHTML = data.progressEmojiJson
+            progressEmojiElement.classList.add('spin');
+        }
+            
+    } else if (data.progressEmojiJson == "✅"){
+        progressEmojiElement.innerHTML = data.progressEmojiJson
+        progressStatus.classList.remove('spin');
+    }
+
+
+    if (data.progressItem == "Completed"){
+        openBuildLocationBtn.style.display = "inline"
+    } else {
+        openBuildLocationBtn.style.display = "none"
+    }
 }
 
 function updateProgress(value){
     progressBar.value = value
+    // if (value == 100)
 }
 
 function progressStatusUpdate(value){
     progressStatus.innerHTML = value
+
 }
 
 function alertTest(test){

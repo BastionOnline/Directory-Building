@@ -4,6 +4,7 @@ import webview
 import os
 import sys
 import threading
+import traceback
 
 from tkinter import filedialog, messagebox
 from modules.templateSetup import initTemplate
@@ -13,7 +14,7 @@ from modules.statusUpdate import status
 # load json file path
 templateFolderDir = os.path.join(os.getcwd(), "templates")
 
-jsonPath = "./userDefaults.json"
+jsonPath = "userDefaults.json"
 
 jsonFile = os.path.join(templateFolderDir,jsonPath)
 print(jsonFile)
@@ -62,6 +63,7 @@ def createJson():
             json.dump(data, f, indent=4)  
     return
 
+createJson()
 
 def updateJsonExcel():
     presentExcelFiles = [
@@ -229,25 +231,12 @@ class Api:
             print(e)
             return requestedValue
 
-    # def selectCustomDateFile():
-    #     result = messagebox.askyesno("Confirm Action", "Do you want to proceed with this operation?")
-
-    #     # result = messagebox.askyesno(
-    #     #     "Confirmation",
-    #     #     "Would you like to customize the dates?"
-    #     # )
-    #     print(f"User selected: {result}")  # True or False
-
-    #     setDefault("Customize Date", result, jsonFile)
-
-        
-        return result
-
     def selectBalanceFile(self):
-        self.balanceFilePath = filedialog.askopenfilename(
+        # use os.path.normpath to standardize path formats
+        self.balanceFilePath = os.path.normpath(filedialog.askopenfilename(
             title="Select a Balance file",
             filetypes=[("Excel Files", "*.xls *.xlsx")]
-        )
+        ))
         print(self.balanceFilePath)
 
         setDefault("Balance", self.balanceFilePath, jsonFile)
@@ -255,10 +244,10 @@ class Api:
         return self.balanceFilePath
     
     def selectScheduleFile(self):
-        self.scheduleFilePath = filedialog.askopenfilename(
+        self.scheduleFilePath = os.path.normpath(filedialog.askopenfilename(
             title="Select a Schedule file",
             filetypes=[("Excel Files", "*.xls *.xlsx")]
-        )
+        ))
         print(self.scheduleFilePath)
 
         setDefault("Schedules", self.scheduleFilePath, jsonFile)
@@ -266,10 +255,10 @@ class Api:
         return self.scheduleFilePath
     
     def selectSalesFile(self):
-        self.salesFilePath = filedialog.askopenfilename(
+        self.salesFilePath = os.path.normpath(filedialog.askopenfilename(
             title="Select a Sales file",
             filetypes=[("Excel Files", "*.xls *.xlsx")]
-        )
+        ))
         print(self.salesFilePath)
 
         setDefault("Sales", self.salesFilePath, jsonFile)
@@ -285,10 +274,10 @@ class Api:
         return self.customizeDateBool
     
     def selectInvoiceFile(self):
-        self.invoiceFilePath = filedialog.askopenfilename(
+        self.invoiceFilePath = os.path.normpath(filedialog.askopenfilename(
             title="Select a Invoice file",
             filetypes=[("Excel Files", "*.xls *.xlsx")]
-        )
+        ))
         print(self.invoiceFilePath)
 
         setDefault("Invoices", self.invoiceFilePath, jsonFile)
@@ -296,10 +285,10 @@ class Api:
         return self.invoiceFilePath
     
     def selectHotelFile(self):
-        self.hotelFilePath = filedialog.askopenfilename(
+        self.hotelFilePath = os.path.normpath(filedialog.askopenfilename(
             title="Select a Hotel file",
             filetypes=[("Excel Files", "*.xls *.xlsx")]
-        )
+        ))
         print(self.hotelFilePath)
 
         setDefault("Hotel - Schedule", self.hotelFilePath, jsonFile)
@@ -307,9 +296,9 @@ class Api:
         return self.hotelFilePath
 
     def selectDestinationFolder(self):
-        self.destinationFolderPath = filedialog.askdirectory(
+        self.destinationFolderPath = os.path.normpath(filedialog.askdirectory(
             title="Select a Folder For New Yearly Directory"
-        )
+        ))
         print(self.destinationFolderPath)
         
         setDefault("Destination Folder", self.destinationFolderPath, jsonFile)
@@ -327,24 +316,29 @@ class Api:
     
     def initializeBuildDirectory(self):
         def startThreading():
-            
-            print(self.window)
-            self.window = webview.active_window()
-            print(self.window)
+            try:
 
-            self.sourceDir, self.files, self.nameExcel, self.nameSolo, self.nameNumberedExcel = initTemplate(self, templateFolderDir)
+                print(self.window)
+                self.window = webview.active_window()
+                print(self.window)
 
-            heist = loadJson(self)
+                self.sourceDir, self.files, self.nameExcel, self.nameSolo, self.nameNumberedExcel = initTemplate(self, templateFolderDir)
 
-            DestDir = heist["Destination Folder"]
-            year = int(heist["Year"])
-            response = heist["Customize Date"]
-            SourceDir = self.sourceDir
-            FileName = self.nameSolo
-            Files = self.nameNumberedExcel
-            
-            automation(DestDir, SourceDir, FileName, Files, year, response, self)
-            status(year, 100, "Completed", self)
+                heist = loadJson(self)
+
+                DestDir = heist["Destination Folder"]
+                year = int(heist["Year"])
+                response = heist["Customize Date"]
+                SourceDir = self.sourceDir
+                FileName = self.nameSolo
+                Files = self.nameNumberedExcel
+                
+                automation(DestDir, SourceDir, FileName, Files, year, response, self)
+                status(year, 100, "Completed", self)
+
+            except Exception as e:
+                with open("error_log.txt", "w") as f:
+                    f.write(traceback.format_exc())
 
         threading.Thread(target=startThreading, daemon=True).start()
         

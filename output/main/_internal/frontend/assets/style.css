@@ -1,5 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+
 body {
-    font-family: 'Courier New', Courier, monospace;
+    font-family: 'Inter';
+    /* font-family: monospace; */
     padding:0;
     margin: 0 auto;
     text-align: center;
@@ -7,12 +11,38 @@ body {
     width: 100vw;
     height: 100vh;
     /* display: flex; */
+    background-color: black;
+    color: white;
+}
+
+/* title {
+    display: flex;
+    align-items: center;
+} */
+
+h1 {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+}
+
+div{
+    padding-bottom: 20px;
+    /* margin:100px; */
 }
 
 #dateInput {
-    /* display: block; */
-    margin: 0 auto;
+    height: 20px;
     width: 80px;
+    border-radius: 3px;
+    margin: 10px;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  cursor: pointer;
 }
 
 progress {
@@ -35,18 +65,54 @@ progress::-moz-progress-bar {
 }
 
 #progressBar {
-    display: block;
-    margin: 0 auto
+    display: inline-block;
+    margin: 0 auto;
 }
 
-#progressStatus {
-    display: block;
+#progressEmojiElement {
+    display: inline;
     margin: 0 auto;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+#openBuildLocation {
+    display: none;
+    /* display: block; */
+    /* display: inline; */
+    margin: 0 auto;
+}
+
+
+
+#progressStatus {
+    display: inline;
+    margin: 0 auto;
+}
+
+
+
+.propSettings {
+    display: inline;
+    margin: 30px auto;
+
+    
 }
 
 table {
     display: none;
     text-align: left;
+    margin: 0 auto;
+}
+
+th {
+    text-align: center
+}
+
+.tableBtn {
+    width: 150px;
 }
 
 .status-box {
@@ -60,6 +126,26 @@ table {
     white-space: nowrap;
 }
 
-table {
-    margin: 0 auto;
+
+.spin {
+    display: inline-block;   
+    animation: spin 2s linear infinite; /* Apply the animation */
 }
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg); /* Start at 0 degrees */
+    }
+    100% {
+        transform: rotate(360deg); /* Rotate a full 360 degrees */
+  }
+}
+
+/* .spin {
+    animation: rotate 2s linear infinite;
+}
+
+@keyframes rotate {
+    from {transform: rotate(0deg); }
+    to {transform: rotate(360deg);}
+} */

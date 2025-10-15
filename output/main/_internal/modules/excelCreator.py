@@ -53,41 +53,44 @@ def excelCreator(numbermonths, FileName, YearDir, countdot, SourceDir, Files, Pe
             SourceFile = os.path.join(SourceDir, str(Files[FileNumber]))
             print(SourceFile)
             # SourceFile = SourceDir + str(Files[FileNumber])
-
-            if os.path.exists(FileDir):
-                print(FileDir + " already exists.\n File moved to Draft folder. \n\n")
-                
-                if os.path.exists(DraftDir):
-                    print("Draft folder already exists.")
-                else:
-                    os.mkdir(DraftDir)
-                    print(DraftDir + " directory made.")
-
-                shutil.move(FileDir, DraftDir)
-                print("file moved to" + DraftDir)
-                
-                shutil.copyfile(SourceFile, FileDir)
-                print("Source file: " + SourceFile)
-                print(FileDir + " created.")
-
-                if FileNumber == 1:
+            try:
+                if os.path.exists(FileDir):
+                    print(FileDir + " already exists.\n File moved to Draft folder. \n\n")
                     
-                    ShedUpdate(FileDir, countdot[period] + " - " + FileName[FileNumber] + ".xlsx", CurWeek)
-                    period +=1
-                else:
-                    period +=1
+                    if os.path.exists(DraftDir):
+                        print("Draft folder already exists.")
+                    else:
+                        os.mkdir(DraftDir)
+                        print(DraftDir + " directory made.")
 
-            else:
-                shutil.copyfile(SourceFile, FileDir)
-                print("Source file: " + SourceFile)
-                print(FileDir + " created.")
-
-                if FileNumber == 1:
+                    shutil.move(FileDir, DraftDir)
+                    print("file moved to" + DraftDir)
                     
-                    ShedUpdate(FileDir, countdot[period] + " - " + FileName[FileNumber] + ".xlsx", CurWeek)
-                    period +=1
+                    shutil.copyfile(SourceFile, FileDir)
+                    print("Source file: " + SourceFile)
+                    print(FileDir + " created.")
+
+                    if FileNumber == 1:
+                        
+                        ShedUpdate(FileDir, countdot[period] + " - " + FileName[FileNumber] + ".xlsx", CurWeek)
+                        period +=1
+                    else:
+                        period +=1
+
                 else:
-                    period +=1
+                    shutil.copyfile(SourceFile, FileDir)
+                    print("Source file: " + SourceFile)
+                    print(FileDir + " created.")
+
+                    if FileNumber == 1:
+                        
+                        ShedUpdate(FileDir, countdot[period] + " - " + FileName[FileNumber] + ".xlsx", CurWeek)
+                        period +=1
+                    else:
+                        period +=1
+            except:
+                period +=1
+                pass
 
 
     createFile(PeriodStart, TotalWeeks, 1)
