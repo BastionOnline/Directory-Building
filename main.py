@@ -145,22 +145,17 @@ def defaultCheck(jsonValue, userDefaults):
                     "error":"create key, value pair",
                     "value": path,
                     "bool": False}
-        # return f"{jsonValue} found"
-        # return path
         elif (os.path.exists(path) == True):
-            # return True
             return {"location": "defaultCheck, key found, path valid", 
                     "error": "None",
                     "value": path,
                     "bool": True}
         else:
-            # return False
             return {"location": "defaultCheck, key found, path not valid",
                     "error": "create key, value pair",
                     "value": path,
                     "bool": False}
     else:
-        # return False
         return {"location": "defaultCheck, key not seen",
                 "error":"create key, value pair",
                 "value": path,
@@ -194,8 +189,6 @@ class Api:
                 # check value sent from json to see if it is present
                 print(userDefaults)
                 requestedValue = defaultCheck(jsonValue, userDefaults)
-                # print(requestedValue["bool"])
-                # return findings
                 return requestedValue
 
             # if there is no json file, make one
@@ -221,7 +214,6 @@ class Api:
                 print(userDefaults)
                 requestedValue = defaultCheck(jsonValue, userDefaults)
                 return requestedValue
-                # return requestedValue["bool"]                
             else:
                 createJson()
                 requestedValue = defaultCheck(jsonValue, userDefaults)
@@ -372,11 +364,6 @@ def resource_path(relative_path):
     except Exception:
         base_path = os.path.abspath(".")
     return os.path.join(base_path, relative_path)
-
-# html_file = resource_path("index.html")
-# css_file = resource_path("assets/style.css")
-# js_file = resource_path("assets/script.js")
-
 
 # enable for debugging
 html_file = resource_path(r'.\frontend\index.html')

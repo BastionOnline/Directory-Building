@@ -57,13 +57,21 @@ def dirCreation(DestDir, year, Files, SourceDir, response, self):
         ScheduleDir = createDir(MonthDir, "2. Schedules", SourceDir, Files, i, monthabv, year, response)
         SalesDir = createDir(MonthDir, "3. Sales", SourceDir, Files, i, monthabv, year, response)
 
+        ScheduleDir = os.path.join(MonthDir, "2. Schedules")
+        ScheduleDraftDir = os.path.join(ScheduleDir, "Drafts")
+
+        if os.path.exists(ScheduleDraftDir):
+            pass
+        else:
+            os.mkdir(ScheduleDraftDir)
+
 
         InvoiceDir = os.path.join(MonthDir, "4. Invoices")
         InSubDir = os.path.join(InvoiceDir, "Submitted")
 
+
         yearlyInvoicePath = os.path.join(YearDir, "4. Invoices.xlsx")
         monthlyInvoiceShortcutLink = os.path.join(InvoiceDir, "Invoices.lnk")
-
 
         def createShortcut(target, shortcut):
             shell = win32com.client.Dispatch("WScript.Shell")
