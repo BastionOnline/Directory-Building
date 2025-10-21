@@ -15,6 +15,8 @@ def initTemplate(self, templateFolderDir):
     fileGrouping.append([["Hotel - Schedule"], ["Hotel - Schedule.xlsx"], ["5. Hotel - Schedule.xlsx"], [self.hotelFilePath]])
 
 
+    # do file check against dirs
+
     for file in fileGrouping:
         print(file[2][0])
 
