@@ -33,6 +33,28 @@ div{
     /* margin:100px; */
 }
 
+a {
+    font-weight: 400;
+    /* color: hsla(185, 80%, 40%, 1); */
+    color: hsla(210, 90%, 45%, 1)
+}
+
+a:hover {
+  color: hsla(210, 100%, 55%, 1);
+}
+
+a:active {
+  color: hsla(210, 95%, 35%, 1); 
+}
+
+/* a:visited {
+  color: hsla(260, 60%, 45%, 1); 
+} */
+
+.devLink {
+    padding: 0;
+}
+
 #dateInput {
     height: 20px;
     width: 80px;
