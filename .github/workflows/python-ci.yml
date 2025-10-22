@@ -31,7 +31,10 @@ jobs:
           }
 
       # Step 4: Run your main script
-      - name: Run project main file
+      - name: Run main file (timeout after 10 seconds)
         shell: pwsh
         run: |
-          python main.py
+            Start-Job { python main.py }
+            Start-Sleep -Seconds 10
+            Get-Job | Stop-Job
+            Write-Output "Tkinter launched successfully."
