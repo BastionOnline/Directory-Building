@@ -48,7 +48,7 @@ def excelCreator(numbermonths, FileName, YearDir, countdot, SourceDir, Files, Pe
             InSchedDir = os.path.join(YearDir, MInShedFold)
             print(InSchedDir)
             
-            DraftDir = os.path.join(InSchedDir, "Draft")
+            DraftDir = os.path.join(InSchedDir, "Drafts")
             FileDir = InSchedDir + "\\" + countdot[period] + " - " + FileName[FileNumber] + ".xlsx"
             SourceFile = os.path.join(SourceDir, str(Files[FileNumber]))
             print(SourceFile)
