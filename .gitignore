@@ -5,6 +5,10 @@
 \build
 \coding
 \debug menu
+\_internal
+\output
+\.vscode
+\templates
 \__pycache__
 \templates
 
