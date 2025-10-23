@@ -5,6 +5,7 @@ import os
 import sys
 import threading
 import traceback
+import shutil
 
 from tkinter import filedialog, messagebox
 from modules.templateSetup import initTemplate
@@ -231,6 +232,10 @@ class Api:
         ))
         print(self.balanceFilePath)
 
+        filename = "1. Balance.xlsx"
+        templateFolderFileCopy = os.path.join(templateFolderDir, filename)
+        shutil.copyfile(self.balanceFilePath, templateFolderFileCopy)
+
         setDefault("Balance", self.balanceFilePath, jsonFile)
 
         return self.balanceFilePath
@@ -242,6 +247,10 @@ class Api:
         ))
         print(self.scheduleFilePath)
 
+        filename = "2 Schedules.xlsx"
+        templateFolderFileCopy = os.path.join(templateFolderDir, filename)
+        shutil.copyfile(self.balanceFilePath, templateFolderFileCopy)
+
         setDefault("Schedules", self.scheduleFilePath, jsonFile)
 
         return self.scheduleFilePath
@@ -252,6 +261,10 @@ class Api:
             filetypes=[("Excel Files", "*.xls *.xlsx")]
         ))
         print(self.salesFilePath)
+
+        filename = "3. Sales.xlsx"
+        templateFolderFileCopy = os.path.join(templateFolderDir, filename)
+        shutil.copyfile(self.balanceFilePath, templateFolderFileCopy)
 
         setDefault("Sales", self.salesFilePath, jsonFile)
 
@@ -272,6 +285,10 @@ class Api:
         ))
         print(self.invoiceFilePath)
 
+        filename = "4. Invoices.xlsx"
+        templateFolderFileCopy = os.path.join(templateFolderDir, filename)
+        shutil.copyfile(self.balanceFilePath, templateFolderFileCopy)
+
         setDefault("Invoices", self.invoiceFilePath, jsonFile)
 
         return self.invoiceFilePath
@@ -282,6 +299,10 @@ class Api:
             filetypes=[("Excel Files", "*.xls *.xlsx")]
         ))
         print(self.hotelFilePath)
+
+        filename = "5. Hotel - Schedule.xlsx"
+        templateFolderFileCopy = os.path.join(templateFolderDir, filename)
+        shutil.copyfile(self.balanceFilePath, templateFolderFileCopy)
 
         setDefault("Hotel - Schedule", self.hotelFilePath, jsonFile)
 
