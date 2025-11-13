@@ -32,7 +32,8 @@ def excelCreator(numbermonths, FileName, YearDir, countdot, SourceDir, Files, Pe
         period = 0
 
         while period < TotalWeeks:
-            status(period, TotalWeeks-1, "Schedules created", self=None)
+            if self != None:
+                status(period, TotalWeeks-1, "Schedules created", self=None)
             #print("period is", period, "Count is", count)
             CurWeek = PeriodStart + timedelta(weeks=period)
             EndWeek = CurWeek + timedelta(days=6)

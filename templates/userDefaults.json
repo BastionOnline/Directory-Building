@@ -1,7 +1,7 @@
 {
     "Year": 2030,
     "Customize Date": "true",
-    "Balance": "C:\\Users\\Coat Check\\OneDrive\\MTCC\\0. Developer Operations\\0. Web Dev\\Projects\\Directory-Building\\templates\\1. Balance.xlsx",
+    "Balance": "",
     "Schedules": "C:\\Users\\Coat Check\\OneDrive\\MTCC\\0. Developer Operations\\0. Web Dev\\Projects\\Directory-Building\\templates\\2. Schedules.xlsx",
     "Sales": "C:\\Users\\Coat Check\\OneDrive\\MTCC\\0. Developer Operations\\0. Web Dev\\Projects\\Directory-Building\\templates\\3. Sales.xlsx",
     "Invoices": "C:\\Users\\Coat Check\\OneDrive\\MTCC\\0. Developer Operations\\0. Web Dev\\Projects\\Directory-Building\\templates\\4. Invoices.xlsx",

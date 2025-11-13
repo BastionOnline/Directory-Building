@@ -2,8 +2,10 @@ import calendar
 import os
 import shutil
 import win32com.client
+
+from modules.errorLogModule import errorLog
 from modules.statusModule import status
-from modules.createDirectoryModule import createDir
+from modules.automation.createDirectoryModule import createDir
 
 def dirCreation(DestDir, year, Files, SourceDir, response, self=None):
     # Makes Year Dir
@@ -50,12 +52,45 @@ def dirCreation(DestDir, year, Files, SourceDir, response, self=None):
     # Makes Month Dirs
     i = 0
     while i < 12:
-        status(i, 11, "Directories created", self=None)
+        if self != None:
+            status(i, 11, "Directories created", self=None)
 
         MonthDir = createDir(YearDir, numbermonths[i], SourceDir, Files, i, monthabv, year, response)
         EventDir = createDir(MonthDir, "1. Event Orders", SourceDir, Files, i, monthabv, year, response)
         ScheduleDir = createDir(MonthDir, "2. Schedules", SourceDir, Files, i, monthabv, year, response)
         SalesDir = createDir(MonthDir, "3. Sales", SourceDir, Files, i, monthabv, year, response)
+
+        try:
+            def yearSubDir(parentFolder, childFolder):
+                subDir = os.path.join(parentFolder, childFolder) 
+                
+                if os.path.exists(subDir):
+                    print(f"{childFolder} folder already exists")
+                    return subDir
+                else:
+                    os.mkdir(subDir)
+                    return subDir
+
+            subDirEventLog = yearSubDir(YearDir, "Event Log")
+            
+            def subFile(parentFolder, childFile, srcFilePath):
+                destFilePath = os.path.join(parentFolder, childFile) 
+                
+                if os.path.exists(destFilePath):
+                    print(f"{childFile} folder already exists")
+                    return destFilePath
+                else:
+                    shutil.copyfile(srcFilePath, destFilePath)
+                    return destFilePath
+                    
+            eventLogFile = "Event Log.xlsx"
+            srcLogFilePath = os.path.join(SourceDir, eventLogFile)
+
+            subFile(subDirEventLog, eventLogFile, srcLogFilePath)
+
+        except Exception as e:
+            errorLog(e)
+
 
         ScheduleDir = os.path.join(MonthDir, "2. Schedules")
         ScheduleDraftDir = os.path.join(ScheduleDir, "Drafts")

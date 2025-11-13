@@ -9,10 +9,12 @@ def xlSales(inputdir, file, MY, FirstDay):
 
     inputfile = os.path.join(inputdir, file)
     outputfile = os.path.join(inputdir, file)
+    print(inputfile)
 
     print("\nUpdating excel Sales file to " + MY + "...")
 
     workbook = openpyxl.load_workbook(inputfile)
+    print(workbook)
 
     sheet = workbook['Yearly Calendar']
     cell = sheet['B2']

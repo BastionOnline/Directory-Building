@@ -3,7 +3,7 @@ import json
 # update user to the progress of the setup
 # import this function to createDirectory
 
-def status(current, total, item, self):
+def status(current, total, item, self=None):
     print("status function called")
     print(current)
     print(total)

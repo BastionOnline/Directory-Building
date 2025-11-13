@@ -7,7 +7,7 @@ import traceback
 import shutil
 from tkinter import filedialog
 from modules.initTemplateModule import initTemplate
-from modules.automationModule import automation
+from modules.automation.automationModule import automation
 from modules.statusModule import status
 
 # load json file path

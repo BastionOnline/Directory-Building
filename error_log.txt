@@ -1,4 +1,12 @@
 Traceback (most recent call last):
-  File "C:\Users\Coat Check\OneDrive\MTCC\0. Developer Operations\0. Web Dev\Projects\Directory-Building\main.py", line 26, in startThreading
-    with open("./templates", "r") as f:
-PermissionError: [Errno 13] Permission denied: './templates'
+  File "C:\Users\Coat Check\OneDrive\MTCC\0. Developer Operations\0. Web Dev\Projects\Directory-Building\main.py", line 34, in <module>
+    automation(destDir, sourceDir, FileName, Files, year, response)
+  File "C:\Users\Coat Check\OneDrive\MTCC\0. Developer Operations\0. Web Dev\Projects\Directory-Building\modules\automation\automationModule.py", line 11, in automation
+    numbermonths, YearDir = dirCreation(DestDir, year, Files, SourceDir, response, self=None)
+  File "C:\Users\Coat Check\OneDrive\MTCC\0. Developer Operations\0. Web Dev\Projects\Directory-Building\modules\automation\dirCreationModule.py", line 87, in dirCreation
+    subFile(subDirEventLog, eventLogFile, srcLogFilePath)
+  File "C:\Users\Coat Check\OneDrive\MTCC\0. Developer Operations\0. Web Dev\Projects\Directory-Building\modules\automation\dirCreationModule.py", line 81, in subFile
+    shutil.copyfile(srcFilePath, destFilePath)
+  File "C:\Python310\lib\shutil.py", line 254, in copyfile
+    with open(src, 'rb') as fsrc:
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\Coat Check\\OneDrive\\MTCC\\0. Developer Operations\\0. Web Dev\\Projects\\Directory-Building\\templates\\Event Log.xlsx'

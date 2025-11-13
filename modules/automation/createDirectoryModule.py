@@ -2,7 +2,7 @@ import os
 import calendar
 import shutil
 from datetime import date
-from modules.excelSalesModule import xlSales
+from modules.xlSalesModule import xlSales
 
 def createDir(parentFolder, childFolder, SourceDir, Files, i, monthabv, year, response):
         directory = os.path.join(parentFolder, childFolder) 
@@ -13,7 +13,9 @@ def createDir(parentFolder, childFolder, SourceDir, Files, i, monthabv, year, re
             os.mkdir(directory)
 
             if (childFolder == "3. Sales"):
+                print(SourceDir)
                 salesPathSource = os.path.join(SourceDir, Files[2])
+                # salesPathSource = os.path.join(SourceDir, Files[2])
                 salesPathDestination = os.path.join(directory, calendar.month_name[i+1] + " Monthly Sales.xlsx")
 
                 shutil.copyfile(salesPathSource, salesPathDestination)

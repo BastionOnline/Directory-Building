@@ -2,13 +2,13 @@ from modules.automation.customizeDateModule import customizeDate
 from modules.automation.dirCreationModule import dirCreation
 from modules.automation.excelCreatorModule import excelCreator
 
-def automation(DestDir, SourceDir, FileName, Files, year, response, self):
+def automation(DestDir, SourceDir, FileName, Files, year, response, self=None):
     #Automation
     # Date and ranges created
     countdot, PeriodStart, TotalWeeks = customizeDate(year)
 
     # Create files and configure them
-    numbermonths, YearDir = dirCreation(DestDir, year, Files, SourceDir, response, self)
+    numbermonths, YearDir = dirCreation(DestDir, year, Files, SourceDir, response, self=None)
 
     # Makes Custom dates on file copies
-    excelCreator(numbermonths, FileName, YearDir, countdot, SourceDir, Files, PeriodStart, TotalWeeks, self)
+    excelCreator(numbermonths, FileName, YearDir, countdot, SourceDir, Files, PeriodStart, TotalWeeks, self=None)
