@@ -11,6 +11,7 @@
 \templates
 \__pycache__
 \templates
+\py10venv
 
 *.code-workspace
 *.xlsx

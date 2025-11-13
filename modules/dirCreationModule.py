@@ -2,10 +2,10 @@ import calendar
 import os
 import shutil
 import win32com.client
-from modules.statusUpdate import status
+from modules.statusModule import status
 from modules.createDirectoryModule import createDir
 
-def dirCreation(DestDir, year, Files, SourceDir, response, self):
+def dirCreation(DestDir, year, Files, SourceDir, response, self=None):
     # Makes Year Dir
     months = calendar.month_name[1:]
     month_number = list(range(1,13))
@@ -50,7 +50,7 @@ def dirCreation(DestDir, year, Files, SourceDir, response, self):
     # Makes Month Dirs
     i = 0
     while i < 12:
-        status(i, 11, "Directories created", self)
+        status(i, 11, "Directories created", self=None)
 
         MonthDir = createDir(YearDir, numbermonths[i], SourceDir, Files, i, monthabv, year, response)
         EventDir = createDir(MonthDir, "1. Event Orders", SourceDir, Files, i, monthabv, year, response)

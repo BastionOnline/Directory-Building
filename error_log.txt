@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "C:\Users\Coat Check\OneDrive\MTCC\0. Developer Operations\0. Web Dev\Projects\Directory-Building\main.py", line 26, in startThreading
+    with open("./templates", "r") as f:
+PermissionError: [Errno 13] Permission denied: './templates'

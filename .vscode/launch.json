@@ -10,7 +10,8 @@
             "request": "launch",
             "program": "${file}",
             "console": "integratedTerminal",
-            "pythonPath": "${workspaceFolder}/myenv/Scripts/python.exe"
+            "pythonPath": "${workspaceFolder}/py10venv/Scripts/python.exe",
+            "args": ["${command:pickArgs}"]
         }
     ]
 }

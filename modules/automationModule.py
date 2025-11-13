@@ -1,6 +1,6 @@
-from modules.customizeDate import customizeDate
-from modules.dirCreation import dirCreation
-from modules.excelCreator import excelCreator
+from modules.customizeDateModule import customizeDate
+from modules.dirCreationModule import dirCreation
+from modules.excelCreatorModule import excelCreator
 
 def automation(DestDir, SourceDir, FileName, Files, year, response, self):
     #Automation
