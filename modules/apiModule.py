@@ -11,6 +11,9 @@ from modules.automation.automationModule import automation
 from modules.statusModule import status
 
 # load json file path
+# BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+# templateFolderDir = os.path.join(BASE_DIR, "templates")
 templateFolderDir = os.path.join(os.getcwd(), "templates")
 
 jsonPath = "userDefaults.json"
@@ -62,7 +65,12 @@ def createJson():
             json.dump(data, f, indent=4)  
     return
 
-createJson()
+# createJson()
+
+try:
+    createJson()
+except:
+    pass
 
 def updateJsonExcel():
     presentExcelFiles = [
@@ -82,7 +90,12 @@ def updateJsonExcel():
             setDefault(file[0][0], "", jsonFile)
     return
 
-updateJsonExcel()
+# updateJsonExcel()
+
+try:
+    updateJsonExcel()
+except:
+    pass
 
 
 def loadJson(self):

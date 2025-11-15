@@ -14,8 +14,15 @@ html_file, css_file, js_file = pyinstallerboilerplate()
 if __name__ == '__main__':
     # used by task scheduler to start with arg
     if len(sys.argv) > 1:
-
-        sourceDir = os.path.join(os.getcwd(), "templates")
+        # print(len(sys.argv))
+        # print(sys.argv[1])
+        # BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+        # sourceDir = os.path.join(BASE_DIR, "templates")
+        sourceDir = r"C:\Users\Coat Check\OneDrive\MTCC\0. Admin Operations - Computer Templates\Yearly Directory Builder\templates"
+        # # sourceDir = os.path.join(os.getcwd(), "templates")
+        # print(f"BaseDir: {BASE_DIR}")
+        # print(f"sourceDir: {sourceDir}")
+        # input("type something")
 
         if os.path.exists(sourceDir):
             try:
@@ -34,6 +41,7 @@ if __name__ == '__main__':
                 automation(destDir, sourceDir, FileName, Files, year, response)
 
             except Exception as e:
+                print(e)
                 timestamp = datetime.now().strftime("%a, %b %d, %Y, %I:%M %p")
                 with open("error_log.txt", "a") as log:
                     log.write(f"\n[{timestamp}]\n{traceback.format_exc()}\n{'-'*60}\n")
